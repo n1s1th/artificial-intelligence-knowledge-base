@@ -6,6 +6,8 @@ A structured, interconnected collection of 9 study notes covering the full scope
 
 This knowledge base transforms the Wikipedia article on [Artificial Intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence) (~30,000 words) into a structured learning system. Each note is a self-contained HTML file with embedded CSS, designed for offline reading and long-term study.
 
+🌐 **[Open the Knowledge Base →](https://n1s1th.github.io/artificial-intelligence-knowledge-base/)**
+
 ## Notes
 
 | # | Title | Topics |
