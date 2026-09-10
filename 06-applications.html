@@ -1,0 +1,346 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>06 · Applications of AI</title>
+<meta name="description" content="Where AI is used in practice: healthcare, gaming, finance, military, software development, web search, and more.">
+<style>:root{--paper:#f7f8fa;--panel:#eef1f5;--white:#fff;--ink:#172131;--ink2:#566579;--ink3:#8090a3;--line:#dce2e9;--deep:#0b1626;--deep2:#122238;--accent:#6c5ce7;--accent2:#9c8fff;--amber:#f0a32b;--teal:#10a5a0;--rose:#e05a6b;--maxw:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:auto;padding:0 28px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}.display{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+p{margin:0 0 14px}h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em}
+.muted{color:var(--ink2)}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(12px);border-bottom:1px solid #203552}
+.nav-in{max-width:var(--maxw);margin:auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cbd8e8}
+.brand b{color:var(--accent2)}.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;color:#9aacc1}.nav-links a:hover{color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+.hero{position:relative;overflow:hidden;background:var(--deep);color:#eaf1f8;padding:92px 0 78px;border-bottom:1px solid #16294a}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#1a2f4f26 1px,transparent 1px),linear-gradient(90deg,#1a2f4f26 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(120% 90% at 72% 0%,#000 30%,transparent 76%)}
+.hero-glow{position:absolute;width:680px;height:680px;right:-210px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.27),transparent 63%);filter:blur(8px)}
+.hero-in{position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:8px;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#0b1626;background:var(--amber);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.pill i{width:7px;height:7px;border-radius:50%;background:#0b1626}
+.hero h1{font-size:clamp(44px,7.5vw,80px);color:#fff;margin:0 0 20px;max-width:900px}.hero h1 span{color:var(--accent2)}
+.hero-sub{max-width:720px;color:#c2d2e4;font-size:clamp(17px,2.2vw,22px);line-height:1.48}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.meta{font:11.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#e2ecf6;border:1px solid #2a446f;padding:6px 12px;border-radius:999px}.meta.hot{border-color:var(--amber);color:var(--amber)}
+section{padding:74px 0}section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.dark{background:var(--deep2);color:#e6eef8}
+.sec-head{max-width:760px;margin-bottom:36px}.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.sec-title{font-size:clamp(28px,4.2vw,40px);line-height:1.08;margin:0;letter-spacing:-.025em}
+.sec-head p{font-size:17px;color:var(--ink2);margin:13px 0 0}.dark .sec-head p{color:#a9bdd4}.dark .eyebrow{color:var(--accent2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.toc,.card,.diagram,table{background:#fff;border:1px solid var(--line);border-radius:9px}
+.toc{padding:24px 26px}.toc-title,.card h4{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-top:0}
+.toc ol{margin:0;padding-left:22px}.toc li{padding:3px 0}.toc a{color:#3f50a9}
+.card{border-top:3px solid var(--accent);padding:24px}.card.amber{border-top-color:var(--amber)}.card.teal{border-top-color:var(--teal)}.card.rose{border-top-color:var(--rose)}.card.ink{border-top-color:var(--deep)}
+.card h3{margin:0 0 8px;font-size:20px}.card h4{margin:0 0 12px}.card p{margin:0 0 8px;color:var(--ink2);font-size:14.5px}
+.definition{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);background:#fff;border-radius:9px;overflow:hidden;margin:20px 0}
+.definition .term{padding:18px;background:var(--deep);color:#fff;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:flex;align-items:center}
+.definition .meaning{padding:18px 20px;color:var(--ink2)}
+@media(max-width:600px){.definition{grid-template-columns:1fr}.definition .term{display:block}}
+.callout{border:1px solid #d9d3ff;background:#f1efff;border-left:4px solid var(--accent);border-radius:8px;padding:20px 22px;margin:24px 0}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#4f4b73}
+.callout.warning{border-color:#f1d8a9;background:#fff7e8;border-left-color:var(--amber)}.callout.warning p{color:#72551f}
+.callout.teal{border-color:#c9ecea;background:#e6f7f6;border-left-color:var(--teal)}.callout.teal p{color:#086d69}
+.callout.rose{border-color:#f5c9ce;background:#fdeef0;border-left-color:var(--rose)}.callout.rose p{color:#8c2c3a}
+.diagram{padding:24px;margin:24px 0}.diagram svg{width:100%;height:auto}
+.diagram-caption{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.flow-box{border:1px solid var(--line);border-radius:8px;padding:17px 12px;text-align:center;background:var(--paper)}
+.flow-box b{display:block;font-size:14px}.flow-box span{display:block;color:var(--ink3);font-size:11px;margin-top:3px}
+.flow-arrow{text-align:center;font-size:20px;color:var(--accent)}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+th{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:12px 15px;background:var(--deep);color:#c7d6e8}
+td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaway{border:1px solid #294261;background:#ffffff08;border-radius:9px;padding:20px}
+.takeaway .n{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.takeaway p{margin:0;color:#c7d6e8;font-size:14px}
+@media(max-width:760px){.takeaways{grid-template-columns:1fr}}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.glossary div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px}
+.glossary b{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:block;margin-bottom:4px}
+.glossary span{display:block;color:var(--ink2);font-size:13.5px;margin-top:3px}
+@media(max-width:700px){.glossary{grid-template-columns:1fr}}
+.internal-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.internal-nav a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink);transition:all .2s}
+.internal-nav a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.internal-nav .dir{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+footer{background:var(--deep);color:#8fa6c0;border-top:1px solid #203552;padding:34px 0}
+.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}footer strong{color:#dce8f5}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink)}
+.related a:hover{border-color:var(--accent)}
+.related .tag{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.related .t{font-size:15px;font-weight:600;margin:6px 0 4px}
+.related .d{font-size:13px;color:var(--ink2)}
+@media(max-width:820px){.related{grid-template-columns:1fr}}
+.kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;padding:2px 6px;background:#eef1f5;border:1px solid var(--line);border-radius:4px}
+ul.clean{padding-left:18px;margin:0}ul.clean li{margin-bottom:6px}
+@media print{nav{display:none}.hero{padding:45px 0}section{padding:38px 0}.card,.toc,table,.diagram{break-inside:avoid}}
+</style></head><body>
+<nav><div class="nav-in"><a class="brand" href="index.html">KNOWLEDGE <b>BASE</b> / AI</a><div class="nav-links"><a href="index.html">Home</a><a href="05-modern-systems.html">← Prev</a><a href="#overview">Overview</a><a href="#domains">Domains</a><a href="#healthcare">Healthcare</a><a href="#gaming">Gaming</a><a href="07-ethics-risks.html">Next →</a></div></div></nav>
+
+<header class="hero" id="top"><div class="hero-grid"></div><div class="hero-glow"></div><div class="wrap hero-in">
+<div class="pill"><i></i> Note 06 of 09</div>
+<div class="eyebrow">Applications</div>
+<h1 class="display">Applications of <span>Artificial Intelligence</span></h1>
+<p class="hero-sub">Where AI is actually used — from healthcare and gaming to finance, military, software development, and web search. A survey of AI in practice, with examples, capabilities, and limitations.</p>
+<div class="meta-row"><span class="meta hot">APPLICATIONS</span><span class="meta">READING · 18–22 MIN</span><span class="meta">PREREQUISITE · NOTE 05</span><span class="meta">KNOWLEDGE BASE · 06 / 09</span></div>
+</div></header>
+
+<main>
+<section id="overview"><div class="wrap"><div class="sec-head"><div class="eyebrow">Start here</div><h2 class="sec-title display">AI is everywhere — but not equally effective.</h2><p>AI and machine learning technology is used in most of the essential applications of the 2020s. However, the degree of capability varies enormously across domains. Some applications are mature and reliable; others are experimental or unreliable. Understanding where AI works well — and where it doesn't — is essential for evaluating real-world AI systems.</p></div>
+
+<div class="grid2">
+<div class="toc"><div class="toc-title">On this page</div><ol>
+<li><a href="#domains">Application domains overview</a></li>
+<li><a href="#software">AI-assisted software development</a></li>
+<li><a href="#chatbots">Chatbots and virtual assistants</a></li>
+<li><a href="#healthcare">Health and medicine</a></li>
+<li><a href="#gaming">Gaming</a></li>
+<li><a href="#mathematics">Mathematics</a></li>
+<li><a href="#finance">Finance</a></li>
+<li><a href="#military">Military</a></li>
+<li><a href="#generative">Generative AI applications</a></li>
+<li><a href="#agents">AI agents in practice</a></li>
+<li><a href="#websearch">Web search</a></li>
+<li><a href="#other">Other industry-specific tasks</a></li>
+<li><a href="#takeaways">Key takeaways</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ol></div>
+<div class="card amber"><h4>Learning objectives</h4><p>By the end of this note, you should be able to:</p>
+<ul class="clean"><li>Identify the major domains where AI is deployed</li>
+<li>Distinguish mature applications from experimental ones</li>
+<li>Explain specific AI achievements (Deep Blue, AlphaGo, AlphaFold)</li>
+<li>Recognize where AI systems fail or require human oversight</li>
+<li>Evaluate claims about AI capabilities in specific domains</li></ul>
+</div>
+</div>
+</div></section>
+
+<section class="alt" id="domains"><div class="wrap"><div class="sec-head"><div class="eyebrow">01 — Overview</div><h2 class="sec-title display">AI applications across domains.</h2></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 400" role="img" aria-label="AI application domains radiating from central AI node">
+<!-- Central node -->
+<circle cx="450" cy="200" r="50" fill="#6c5ce7"/>
+<text x="450" y="205" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">AI</text>
+<!-- Surrounding domains -->
+<circle cx="200" cy="100" r="40" fill="#10a5a0"/>
+<text x="200" y="105" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Healthcare</text>
+<circle cx="450" cy="60" r="40" fill="#f0a32b"/>
+<text x="450" y="65" text-anchor="middle" fill="#0b1626" font-size="11" font-weight="600">Software</text>
+<circle cx="700" cy="100" r="40" fill="#e05a6b"/>
+<text x="700" y="105" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Gaming</text>
+<circle cx="150" cy="250" r="40" fill="#10a5a0"/>
+<text x="150" y="255" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Finance</text>
+<circle cx="350" cy="340" r="40" fill="#f0a32b"/>
+<text x="350" y="345" text-anchor="middle" fill="#0b1626" font-size="11" font-weight="600">Math</text>
+<circle cx="550" cy="340" r="40" fill="#e05a6b"/>
+<text x="550" y="345" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Military</text>
+<circle cx="750" cy="250" r="40" fill="#10a5a0"/>
+<text x="750" y="255" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Web Search</text>
+<!-- Connections -->
+<line x1="240" y1="120" x2="400" y2="180" stroke="#dce2e9" stroke-width="2"/>
+<line x1="450" y1="100" x2="450" y2="150" stroke="#dce2e9" stroke-width="2"/>
+<line x1="660" y1="120" x2="500" y2="180" stroke="#dce2e9" stroke-width="2"/>
+<line x1="190" y1="230" x2="400" y2="210" stroke="#dce2e9" stroke-width="2"/>
+<line x1="380" y1="310" x2="430" y2="240" stroke="#dce2e9" stroke-width="2"/>
+<line x1="520" y1="310" x2="470" y2="240" stroke="#dce2e9" stroke-width="2"/>
+<line x1="710" y1="230" x2="500" y2="210" stroke="#dce2e9" stroke-width="2"/>
+</svg>
+<div class="diagram-caption">Figure 06 · AI is deployed across many domains, with varying degrees of maturity and reliability</div>
+</div>
+
+<div class="callout"><strong>Not all applications are equal</strong><p>Some AI applications are mature and reliable (spam filters, recommendation systems), while others are experimental or unreliable (autonomous vehicles, medical diagnosis). The maturity of an application depends on the availability of training data, the clarity of the task, and the cost of errors.</p></div>
+</div></section>
+
+<section id="software"><div class="wrap"><div class="sec-head"><div class="eyebrow">02 — Software Development</div><h2 class="sec-title display">AI-assisted coding.</h2><p>AI tools like GitHub Copilot, Cursor, and Codex have transformed software development by generating code from natural-language descriptions, completing partial code, and explaining existing code.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>Current capabilities</h3><p>AI code assistants can generate boilerplate code, translate between languages, write tests, debug errors, and explain complex code. They are particularly effective for repetitive tasks, standard patterns, and well-documented APIs.</p>
+<p><strong>Adoption:</strong> Surveys suggest 70-90% of professional developers now use AI coding assistants regularly.</p></div>
+<div class="card rose"><h3>Limitations</h3><p>AI-generated code can contain subtle bugs, security vulnerabilities, or performance issues. Complex logic, novel algorithms, and domain-specific optimizations still require human expertise. Code assistants can also hallucinate non-existent libraries or APIs.</p>
+<p><strong>Best practice:</strong> Treat AI-generated code as a starting point, not a final product. Always review, test, and understand the code before deploying it.</p></div>
+</div>
+
+<div class="callout warning"><strong>The productivity paradox</strong><p>While AI coding assistants increase individual productivity, they may also increase the volume of code that needs review, testing, and maintenance. The net effect on software quality and development velocity is still being studied.</p></div>
+</div></section>
+
+<section class="alt" id="chatbots"><div class="wrap"><div class="sec-head"><div class="eyebrow">03 — Chatbots</div><h2 class="sec-title display">Conversational AI.</h2><p>Chatbots and virtual assistants have become one of the most visible applications of AI. From customer service to personal assistants, conversational AI is deployed across industries.</p></div>
+
+<div class="grid3">
+<div class="card"><h4>Customer service</h4><p>AI chatbots handle routine inquiries, route complex cases to humans, and provide 24/7 availability. They reduce costs but can frustrate users when they fail to understand nuanced questions.</p></div>
+<div class="card teal"><h4>Virtual assistants</h4><p>Siri, Alexa, Google Assistant — AI systems that respond to voice commands, control smart devices, and provide information. They excel at simple tasks but struggle with complex, multi-step requests.</p></div>
+<div class="card amber"><h4>Therapeutic chatbots</h4><p>AI systems designed to provide emotional support or cognitive behavioral therapy. Controversial — they can provide accessible support but lack genuine empathy and clinical judgment.</p></div>
+</div>
+
+<div class="callout rose"><strong>The ELIZA effect</strong><p>Humans tend to attribute understanding and emotion to systems that produce human-like responses, even when those systems have no comprehension. This can lead to over-trust and emotional dependence on AI systems that do not actually understand users. → <a href="07-ethics-risks.html">Note 07: Ethics (substitution for human interaction)</a></p></div>
+</div></section>
+
+<section id="healthcare"><div class="wrap"><div class="sec-head"><div class="eyebrow">04 — Healthcare</div><h2 class="sec-title display">AI in health and medicine.</h2><p>AlphaFold 2 (2021) demonstrated the ability to approximate, in hours rather than months, the 3D structure of a protein. In 2023, it was reported that AI-assisted diagnosis matched or exceeded human performance in some medical imaging tasks.</p></div>
+
+<div class="definition"><div class="term">AlphaFold</div><div class="meaning">A deep learning system by Google DeepMind that predicts protein 3D structures from amino acid sequences with near-experimental accuracy. It solved a 50-year grand challenge in biology and has accelerated drug discovery and disease research.</div></div>
+
+<table><thead><tr><th>Application</th><th>Capability</th><th>Status</th><th>Limitations</th></tr></thead><tbody>
+<tr><td>Medical imaging</td><td>Detecting tumors, fractures, diseases in X-rays, MRIs, CT scans</td><td>High accuracy in controlled settings; some systems FDA-approved</td><td>Performance varies by patient population; requires validation</td></tr>
+<tr><td>Drug discovery</td><td>Predicting molecular properties, identifying drug candidates</td><td>Accelerating early-stage research; AlphaFold breakthrough</td><td>Clinical trials still required; high failure rate</td></tr>
+<tr><td>Diagnostics</td><td>Analyzing symptoms, test results to suggest diagnoses</td><td>Experimental; not yet replacing human doctors</td><td>Liability, accountability, need for human oversight</td></tr>
+<tr><td>Personalized medicine</td><td>Tailoring treatments based on genetic and clinical data</td><td>Emerging; some applications in oncology</td><td>Data privacy, limited clinical validation</td></tr>
+<tr><td>Administrative tasks</td><td>Scheduling, billing, documentation</td><td>Widely deployed; reduces burden on staff</td><td>Integration challenges, errors require human review</td></tr>
+</tbody></table>
+
+<div class="callout teal"><strong>High stakes, high potential</strong><p>Healthcare AI has enormous potential to improve outcomes and reduce costs, but errors can be life-threatening. Regulatory approval, clinical validation, and human oversight are essential. AI should augment, not replace, medical professionals.</p></div>
+</div></section>
+
+<section class="alt" id="gaming"><div class="wrap"><div class="sec-head"><div class="eyebrow">05 — Gaming</div><h2 class="sec-title display">AI in games: from chess to Go to StarCraft.</h2><p>Game playing programs have been used since the 1950s to demonstrate and test AI's most advanced techniques. Games provide controlled environments with clear objectives, making them ideal testbeds for AI research.</p></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 200" role="img" aria-label="Timeline of AI gaming milestones">
+<line x1="100" y1="100" x2="800" y2="100" stroke="#6c5ce7" stroke-width="3"/>
+<!-- Milestones -->
+<circle cx="150" cy="100" r="12" fill="#10a5a0"/>
+<text x="150" y="80" text-anchor="middle" fill="#172131" font-size="12" font-weight="700">1997</text>
+<text x="150" y="130" text-anchor="middle" fill="#566579" font-size="11">Deep Blue</text>
+<text x="150" y="145" text-anchor="middle" fill="#566579" font-size="10">defeats Kasparov</text>
+
+<circle cx="350" cy="100" r="12" fill="#f0a32b"/>
+<text x="350" y="80" text-anchor="middle" fill="#172131" font-size="12" font-weight="700">2016</text>
+<text x="350" y="130" text-anchor="middle" fill="#566579" font-size="11">AlphaGo</text>
+<text x="350" y="145" text-anchor="middle" fill="#566579" font-size="10">defeats Lee Sedol</text>
+
+<circle cx="550" cy="100" r="12" fill="#e05a6b"/>
+<text x="550" y="80" text-anchor="middle" fill="#172131" font-size="12" font-weight="700">2019</text>
+<text x="550" y="130" text-anchor="middle" fill="#566579" font-size="11">AlphaStar</text>
+<text x="550" y="145" text-anchor="middle" fill="#566579" font-size="10">masters StarCraft II</text>
+
+<circle cx="700" cy="100" r="12" fill="#6c5ce7"/>
+<text x="700" y="80" text-anchor="middle" fill="#172131" font-size="12" font-weight="700">2020+</text>
+<text x="700" y="130" text-anchor="middle" fill="#566579" font-size="11">Game AI</text>
+<text x="700" y="145" text-anchor="middle" fill="#566579" font-size="10">NPCs, procedural generation</text>
+</svg>
+<div class="diagram-caption">Figure 07 · Major AI milestones in gaming — from chess to real-time strategy games</div>
+</div>
+
+<div class="grid2">
+<div class="card"><h3>Deep Blue (1997)</h3><p>IBM's chess computer defeated world champion Garry Kasparov in a six-game match. It used brute-force search with hand-crafted evaluation functions, examining 200 million positions per second. This demonstrated that AI could master complex strategy games.</p></div>
+<div class="card teal"><h3>AlphaGo (2016)</h3><p>Google DeepMind's program defeated world Go champion Lee Sedol 4-1. Unlike Deep Blue, AlphaGo used deep learning and reinforcement learning, training on millions of games and learning intuitive pattern recognition. Go was considered far harder than chess due to its larger state space.</p></div>
+</div>
+
+<div class="callout"><strong>Why games matter</strong><p>Games are microcosms of real-world problems — they require planning, perception, adaptation, and competition. AI breakthroughs in games often translate to practical applications. The techniques developed for AlphaGo are now used in protein folding, materials science, and robotics.</p></div>
+</div></section>
+
+<section id="mathematics"><div class="wrap"><div class="sec-head"><div class="eyebrow">06 — Mathematics</div><h2 class="sec-title display">AI in mathematical research.</h2><p>In mathematics, probabilistic large language models are versatile but can also produce wrong answers in the form of hallucinations. The Alibaba Group developed a version of its Qwen model that can solve mathematical problems and prove theorems.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>AlphaDev</h3><p>DeepMind's system discovered faster sorting algorithms by treating algorithm design as a game. It found sorting routines that are 70% faster than those in standard libraries for small arrays. This demonstrates AI's ability to improve fundamental algorithms.</p></div>
+<div class="card teal"><h3>Theorem proving</h3><p>AI systems can verify mathematical proofs, suggest proof strategies, and even discover new theorems. However, they can also produce plausible-sounding but incorrect proofs. Human verification remains essential for important results.</p></div>
+</div>
+
+<div class="callout warning"><strong>Hallucination in mathematics</strong><p>LLMs can produce confident but incorrect mathematical reasoning. They may state false theorems, make subtle logical errors, or invent non-existent mathematical objects. For mathematics, where correctness is paramount, AI assistance requires careful human verification.</p></div>
+</div></section>
+
+<section class="alt" id="finance"><div class="wrap"><div class="sec-head"><div class="eyebrow">07 — Finance</div><h2 class="sec-title display">AI in financial markets.</h2><p>AI systems are widely used in finance for algorithmic trading, fraud detection, credit scoring, and risk assessment. High-frequency trading algorithms execute millions of trades per second based on market signals.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>Algorithmic trading</h3><p>AI systems analyze market data, news sentiment, and technical indicators to make trading decisions faster than humans. They account for a significant portion of trading volume in major markets.</p>
+<p><strong>Risk:</strong> Algorithmic trading can amplify market volatility and contribute to flash crashes when multiple systems react to the same signals.</p></div>
+<div class="card teal"><h3>Fraud detection</h3><p>Machine learning models detect anomalous transactions that may indicate fraud, money laundering, or identity theft. They process millions of transactions per day, flagging suspicious activity for human review.</p>
+<p><strong>Challenge:</strong> Balancing false positives (legitimate transactions flagged as fraud) against false negatives (fraud that goes undetected).</p></div>
+</div>
+</div></section>
+
+<section id="military"><div class="wrap"><div class="sec-head"><div class="eyebrow">08 — Military</div><h2 class="sec-title display">AI in defense and warfare.</h2><p>AI is increasingly used in military applications including surveillance, logistics, autonomous vehicles, and weapons systems. These applications raise significant ethical concerns.</p></div>
+
+<div class="grid2">
+<div class="card amber"><h3>Current applications</h3><p>AI is used for intelligence analysis, logistics optimization, predictive maintenance, and autonomous drones. Military forces are investing heavily in AI capabilities, viewing them as strategically important.</p></div>
+<div class="card rose"><h3>Lethal autonomous weapons</h3><p>Systems that can select and engage targets without human oversight. Several countries are developing such systems, raising concerns about accountability, escalation, and the dehumanization of warfare.</p>
+<p>→ <a href="07-ethics-risks.html">Note 07: Ethics (weapons and bad actors)</a></p></div>
+</div>
+</div></section>
+
+<section class="alt" id="generative"><div class="wrap"><div class="sec-head"><div class="eyebrow">09 — Generative AI</div><h2 class="sec-title display">Creating content with AI.</h2><p>Generative AI systems can produce text, images, audio, video, and code. These systems have transformed content creation, design, and creative workflows across industries.</p></div>
+
+<div class="grid3">
+<div class="card"><h4>Text generation</h4><p>LLMs write articles, emails, code, marketing copy, and creative fiction. Used in content marketing, customer service, education, and personal productivity.</p></div>
+<div class="card teal"><h4>Image generation</h4><p>Diffusion models create images from text descriptions. Used in advertising, design, entertainment, and art. Raises questions about copyright and authenticity.</p></div>
+<div class="card amber"><h4>Audio &amp; video</h4><p>AI generates speech, music, and video content. Used in entertainment, education, and accessibility. Deepfakes pose significant misinformation risks.</p></div>
+</div>
+
+<div class="callout"><strong>The creativity question</strong><p>Can AI be truly creative, or is it merely recombining patterns from training data? Generative AI produces novel outputs, but whether this constitutes creativity or sophisticated mimicry remains debated. → <a href="09-philosophy-future.html">Note 09: Philosophy</a></p></div>
+</div></section>
+
+<section id="agents"><div class="wrap"><div class="sec-head"><div class="eyebrow">10 — Agents</div><h2 class="sec-title display">AI agents in practice.</h2><p>AI agents are software entities designed to perceive their environment, make decisions, and take actions autonomously to achieve specific goals. They represent a shift from single-turn chat to multi-step, goal-oriented systems.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>Current applications</h3><p>Agents are being deployed for research (searching and synthesizing information), software development (writing and testing code), customer service (handling complex multi-step inquiries), and personal assistance (managing calendars, email, and tasks).</p></div>
+<div class="card teal"><h3>Multi-agent systems</h3><p>Frameworks like CrewAI enable multiple agents to collaborate on complex tasks, dividing work and coordinating actions. This is an emerging area with significant potential but also challenges in coordination and reliability.</p></div>
+</div>
+
+<div class="callout teal"><strong>The agentic future</strong><p>Many researchers believe agents represent the next major evolution in AI — moving from models that answer questions to systems that take action. The transition is underway but faces challenges in reliability, safety, and human oversight. → <a href="05-modern-systems.html">Note 05: Modern AI Systems (agents)</a></p></div>
+</div></section>
+
+<section class="alt" id="websearch"><div class="wrap"><div class="sec-head"><div class="eyebrow">11 — Web Search</div><h2 class="sec-title display">AI in search engines.</h2><p>AI Overviews and similar features use large language models to provide synthesized answers to search queries, rather than just lists of links. This represents a fundamental shift in how people find information online.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>AI-powered search</h3><p>Modern search engines use AI to understand query intent, rank results, and generate direct answers. Google's AI Overviews, Bing's Copilot, and Perplexity provide conversational search experiences.</p></div>
+<div class="card rose"><h3>Challenges</h3><p>AI-generated search answers can contain errors, hallucinations, or outdated information. They may also reduce traffic to source websites, raising concerns about the sustainability of web content creation.</p></div>
+</div>
+</div></section>
+
+<section id="other"><div class="wrap"><div class="sec-head"><div class="eyebrow">12 — Other Industries</div><h2 class="sec-title display">AI across industries.</h2><p>In a 2017 survey, one in five companies reported having incorporated "AI" in some offerings or processes. AI is now used in virtually every industry, though the depth and sophistication of deployment varies widely.</p></div>
+
+<div class="grid3">
+<div class="card"><h4>Autonomous vehicles</h4><p>Self-driving cars use computer vision, sensor fusion, and planning algorithms. Still experimental; full autonomy remains a challenge due to edge cases and safety requirements.</p></div>
+<div class="card teal"><h4>Agriculture</h4><p>AI optimizes crop yields, detects diseases, automates harvesting, and predicts weather impacts. Precision agriculture reduces waste and improves sustainability.</p></div>
+<div class="card amber"><h4>Manufacturing</h4><p>Predictive maintenance, quality control, supply chain optimization, and robotic automation. AI improves efficiency and reduces downtime.</p></div>
+</div>
+
+<div class="grid3" style="margin-top:18px">
+<div class="card rose"><h4>Education</h4><p>Personalized learning, automated grading, intelligent tutoring systems. Potential to improve access but raises concerns about data privacy and the role of human teachers.</p></div>
+<div class="card"><h4>Legal</h4><p>Contract analysis, legal research, document review. AI assists lawyers but cannot replace legal judgment and advocacy.</p></div>
+<div class="card teal"><h4>Energy</h4><p>Grid optimization, predictive maintenance, renewable energy forecasting. AI helps integrate variable renewable sources into power grids.</p></div>
+</div>
+</div></section>
+
+<section class="dark" id="takeaways"><div class="wrap"><div class="sec-head center"><div class="eyebrow">End of note</div><h2 class="sec-title display">Remember these ideas.</h2></div>
+<div class="takeaways">
+<div class="takeaway"><div class="n">01</div><p>AI is deployed across many domains, but capability and reliability vary enormously. Some applications are mature; others are experimental.</p></div>
+<div class="takeaway"><div class="n">02</div><p>AI has achieved remarkable milestones in games (Deep Blue, AlphaGo) that demonstrate capabilities later applied to real-world problems.</p></div>
+<div class="takeaway"><div class="n">03</div><p>Healthcare AI (AlphaFold, medical imaging) has enormous potential but requires careful validation and human oversight due to high stakes.</p></div>
+<div class="takeaway"><div class="n">04</div><p>AI-assisted software development is widely adopted but generated code requires human review for correctness and security.</p></div>
+<div class="takeaway"><div class="n">05</div><p>Generative AI has transformed content creation but raises questions about authenticity, copyright, and the nature of creativity.</p></div>
+<div class="takeaway"><div class="n">06</div><p>AI agents represent the next evolution — from answering questions to taking autonomous action toward goals.</p></div>
+</div>
+</div></section>
+
+<section id="glossary"><div class="wrap"><div class="sec-head"><div class="eyebrow">Reference</div><h2 class="sec-title display">Glossary</h2></div>
+<div class="glossary">
+<div><b>AlphaFold</b><span>DeepMind's system that predicts protein 3D structures from amino acid sequences.</span></div>
+<div><b>Deep Blue</b><span>IBM's chess computer that defeated Garry Kasparov in 1997.</span></div>
+<div><b>AlphaGo</b><span>DeepMind's program that defeated world Go champion Lee Sedol in 2016.</span></div>
+<div><b>AlphaDev</b><span>DeepMind's system that discovered faster sorting algorithms.</span></div>
+<div><b>Algorithmic Trading</b><span>AI systems that execute trades based on market signals faster than humans.</span></div>
+<div><b>AI Overview</b><span>Google's feature that provides AI-generated answers to search queries.</span></div>
+<div><b>Precision Agriculture</b><span>Using AI to optimize farming practices and reduce waste.</span></div>
+<div><b>Predictive Maintenance</b><span>Using AI to predict equipment failures before they occur.</span></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="wrap"><div class="sec-head"><div class="eyebrow">Navigation</div><h2 class="sec-title display">Continue learning.</h2></div>
+<div class="internal-nav">
+<a href="05-modern-systems.html"><div class="dir">← Previous</div><strong>05 · Modern AI Systems</strong><p class="muted">The systems that enable these applications</p></a>
+<a href="07-ethics-risks.html"><div class="dir">Next →</div><strong>07 · Ethics, Risks &amp; Harms</strong><p class="muted">What can go wrong when AI is deployed</p></a>
+</div>
+<div class="related" style="margin-top:28px">
+<a href="05-modern-systems.html"><div class="tag">Systems</div><div class="t">Modern AI Systems</div><div class="d">Generative AI, agents, and the AI stack</div></a>
+<a href="02-goals.html"><div class="tag">Goals</div><div class="t">The Goals of AI Research</div><div class="d">The capabilities these applications demonstrate</div></a>
+<a href="07-ethics-risks.html"><div class="tag">Ethics</div><div class="t">Ethics, Risks &amp; Harms</div><div class="d">Ethical concerns specific to AI applications</div></a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-in"><div class="mono"><strong>06 · APPLICATIONS OF AI</strong><br>Knowledge Base · Note 06 of 09</div><div class="mono">Source: Wikipedia · September 2026</div></div></footer>
+</body></html>

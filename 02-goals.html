@@ -1,0 +1,338 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>02 · The Goals of AI Research</title>
+<meta name="description" content="What AI is trying to achieve: reasoning, learning, perception, language, and more.">
+<style>:root{--paper:#f7f8fa;--panel:#eef1f5;--white:#fff;--ink:#172131;--ink2:#566579;--ink3:#8090a3;--line:#dce2e9;--deep:#0b1626;--deep2:#122238;--accent:#6c5ce7;--accent2:#9c8fff;--amber:#f0a32b;--teal:#10a5a0;--rose:#e05a6b;--maxw:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:auto;padding:0 28px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}.display{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+p{margin:0 0 14px}h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em}
+.muted{color:var(--ink2)}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(12px);border-bottom:1px solid #203552}
+.nav-in{max-width:var(--maxw);margin:auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cbd8e8}
+.brand b{color:var(--accent2)}.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;color:#9aacc1}.nav-links a:hover{color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+.hero{position:relative;overflow:hidden;background:var(--deep);color:#eaf1f8;padding:92px 0 78px;border-bottom:1px solid #16294a}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#1a2f4f26 1px,transparent 1px),linear-gradient(90deg,#1a2f4f26 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(120% 90% at 72% 0%,#000 30%,transparent 76%)}
+.hero-glow{position:absolute;width:680px;height:680px;right:-210px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.27),transparent 63%);filter:blur(8px)}
+.hero-in{position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:8px;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#0b1626;background:var(--amber);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.pill i{width:7px;height:7px;border-radius:50%;background:#0b1626}
+.hero h1{font-size:clamp(44px,7.5vw,80px);color:#fff;margin:0 0 20px;max-width:900px}.hero h1 span{color:var(--accent2)}
+.hero-sub{max-width:720px;color:#c2d2e4;font-size:clamp(17px,2.2vw,22px);line-height:1.48}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.meta{font:11.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#e2ecf6;border:1px solid #2a446f;padding:6px 12px;border-radius:999px}.meta.hot{border-color:var(--amber);color:var(--amber)}
+section{padding:74px 0}section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.dark{background:var(--deep2);color:#e6eef8}
+.sec-head{max-width:760px;margin-bottom:36px}.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.sec-title{font-size:clamp(28px,4.2vw,40px);line-height:1.08;margin:0;letter-spacing:-.025em}
+.sec-head p{font-size:17px;color:var(--ink2);margin:13px 0 0}.dark .sec-head p{color:#a9bdd4}.dark .eyebrow{color:var(--accent2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.toc,.card,.diagram,table{background:#fff;border:1px solid var(--line);border-radius:9px}
+.toc{padding:24px 26px}.toc-title,.card h4{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-top:0}
+.toc ol{margin:0;padding-left:22px}.toc li{padding:3px 0}.toc a{color:#3f50a9}
+.card{border-top:3px solid var(--accent);padding:24px}.card.amber{border-top-color:var(--amber)}.card.teal{border-top-color:var(--teal)}.card.rose{border-top-color:var(--rose)}.card.ink{border-top-color:var(--deep)}
+.card h3{margin:0 0 8px;font-size:20px}.card h4{margin:0 0 12px}.card p{margin:0 0 8px;color:var(--ink2);font-size:14.5px}
+.definition{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);background:#fff;border-radius:9px;overflow:hidden;margin:20px 0}
+.definition .term{padding:18px;background:var(--deep);color:#fff;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:flex;align-items:center}
+.definition .meaning{padding:18px 20px;color:var(--ink2)}
+@media(max-width:600px){.definition{grid-template-columns:1fr}.definition .term{display:block}}
+.callout{border:1px solid #d9d3ff;background:#f1efff;border-left:4px solid var(--accent);border-radius:8px;padding:20px 22px;margin:24px 0}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#4f4b73}
+.callout.warning{border-color:#f1d8a9;background:#fff7e8;border-left-color:var(--amber)}.callout.warning p{color:#72551f}
+.callout.teal{border-color:#c9ecea;background:#e6f7f6;border-left-color:var(--teal)}.callout.teal p{color:#086d69}
+.callout.rose{border-color:#f5c9ce;background:#fdeef0;border-left-color:var(--rose)}.callout.rose p{color:#8c2c3a}
+.diagram{padding:24px;margin:24px 0}.diagram svg{width:100%;height:auto}
+.diagram-caption{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.flow-box{border:1px solid var(--line);border-radius:8px;padding:17px 12px;text-align:center;background:var(--paper)}
+.flow-box b{display:block;font-size:14px}.flow-box span{display:block;color:var(--ink3);font-size:11px;margin-top:3px}
+.flow-arrow{text-align:center;font-size:20px;color:var(--accent)}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+th{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:12px 15px;background:var(--deep);color:#c7d6e8}
+td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaway{border:1px solid #294261;background:#ffffff08;border-radius:9px;padding:20px}
+.takeaway .n{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.takeaway p{margin:0;color:#c7d6e8;font-size:14px}
+@media(max-width:760px){.takeaways{grid-template-columns:1fr}}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.glossary div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px}
+.glossary b{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:block;margin-bottom:4px}
+.glossary span{display:block;color:var(--ink2);font-size:13.5px;margin-top:3px}
+@media(max-width:700px){.glossary{grid-template-columns:1fr}}
+.internal-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.internal-nav a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink);transition:all .2s}
+.internal-nav a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.internal-nav .dir{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+footer{background:var(--deep);color:#8fa6c0;border-top:1px solid #203552;padding:34px 0}
+.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}footer strong{color:#dce8f5}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink)}
+.related a:hover{border-color:var(--accent)}
+.related .tag{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.related .t{font-size:15px;font-weight:600;margin:6px 0 4px}
+.related .d{font-size:13px;color:var(--ink2)}
+@media(max-width:820px){.related{grid-template-columns:1fr}}
+.kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;padding:2px 6px;background:#eef1f5;border:1px solid var(--line);border-radius:4px}
+ul.clean{padding-left:18px;margin:0}ul.clean li{margin-bottom:6px}
+@media print{nav{display:none}.hero{padding:45px 0}section{padding:38px 0}.card,.toc,table,.diagram{break-inside:avoid}}
+</style></head><body>
+<nav><div class="nav-in"><a class="brand" href="index.html">KNOWLEDGE <b>BASE</b> / AI</a><div class="nav-links"><a href="index.html">Home</a><a href="01-foundations.html">← Prev</a><a href="#overview">Overview</a><a href="#goals">Goals</a><a href="03-traditional-techniques.html">Next →</a></div></div></nav>
+
+<header class="hero" id="top"><div class="hero-grid"></div><div class="hero-glow"></div><div class="wrap hero-in">
+<div class="pill"><i></i> Note 02 of 09</div>
+<div class="eyebrow">Goals</div>
+<h1 class="display">The Goals of <span>AI Research</span></h1>
+<p class="hero-sub">The eight traditional capabilities that define what artificial intelligence tries to achieve — from reasoning and planning to perception and social intelligence.</p>
+<div class="meta-row"><span class="meta hot">CORE CONCEPTS</span><span class="meta">READING · 18–22 MIN</span><span class="meta">PREREQUISITE · NOTE 01</span><span class="meta">KNOWLEDGE BASE · 02 / 09</span></div>
+</div></header>
+
+<main>
+<section id="overview"><div class="wrap"><div class="sec-head"><div class="eyebrow">Start here</div><h2 class="sec-title display">The general problem of intelligence has been broken into subproblems.</h2><p>The general problem of simulating (or creating) intelligence has been broken down into subproblems. These consist of specific traits or capabilities that researchers expect an intelligent system to display. The traits described here have received the most attention and cover the scope of AI research.</p></div>
+
+<div class="grid2">
+<div class="toc"><div class="toc-title">On this page</div><ol>
+<li><a href="#reasoning">Reasoning and problem-solving</a></li>
+<li><a href="#knowledge">Knowledge representation</a></li>
+<li><a href="#planning">Planning and decision-making</a></li>
+<li><a href="#learning">Learning</a></li>
+<li><a href="#nlp">Natural language processing</a></li>
+<li><a href="#perception">Perception</a></li>
+<li><a href="#social">Social intelligence</a></li>
+<li><a href="#general">General intelligence</a></li>
+<li><a href="#relationships">How goals connect</a></li>
+<li><a href="#takeaways">Key takeaways</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ol></div>
+<div class="card amber"><h4>Learning objectives</h4><p>By the end of this note, you should be able to:</p>
+<ul class="clean"><li>List and explain the eight traditional goals of AI research</li>
+<li>Describe how each goal relates to human intelligence</li>
+<li>Identify which goals have been largely achieved and which remain open</li>
+<li>Explain the interdependencies between different goals</li></ul>
+</div>
+</div>
+</div></section>
+
+<section class="alt" id="reasoning"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 01</div><h2 class="sec-title display">Reasoning and problem-solving.</h2><p>Early researchers developed algorithms that imitated step-by-step reasoning that humans use when solving puzzles or making logical deductions. By the late 1980s and 1990s, methods were developed for dealing with uncertain or incomplete information, employing concepts from probability and economics.</p></div>
+
+<div class="definition"><div class="term">Reasoning</div><div class="meaning">The ability to draw logical conclusions from available information, using deduction, induction, or abduction.</div></div>
+
+<div class="callout"><strong>The combinatorial explosion</strong><p>Many of these algorithms were insufficient for solving large reasoning problems because they experienced a "combinatorial explosion" — they become exponentially slower as the size of the problem grows. This limitation drove research into more efficient search methods and heuristic approaches.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>Symbolic reasoning</h3><p>Early AI used explicit rules and logic to reason about the world. Programs could prove mathematical theorems, solve algebra problems, and play games like chess by exploring possible moves.</p>
+<p><strong>Strengths:</strong> Transparent, explainable, precise</p>
+<p><strong>Limits:</strong> Brittle, requires explicit knowledge encoding, computationally expensive</p></div>
+<div class="card teal"><h3>Probabilistic reasoning</h3><p>Modern approaches use probability theory to handle uncertainty. Bayesian networks, Markov models, and other probabilistic frameworks allow systems to reason when information is incomplete or noisy.</p>
+<p><strong>Strengths:</strong> Handles uncertainty, learns from data, robust</p>
+<p><strong>Limits:</strong> Less transparent, requires training data</p></div>
+</div>
+
+<p style="margin-top:24px">→ <a href="03-traditional-techniques.html">Note 03: Traditional AI Techniques</a> covers search algorithms, logic, and probabilistic methods in detail.</p>
+</div></section>
+
+<section id="knowledge"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 02</div><h2 class="sec-title display">Knowledge representation.</h2><p>An ontology represents knowledge as a set of concepts within a domain and the relationships between those concepts. AI programs use knowledge to answer questions intelligently and make deductions about the real world.</p></div>
+
+<div class="definition"><div class="term">Knowledge Representation</div><div class="meaning">Methods for encoding facts, concepts, and relationships in a form that AI systems can use for reasoning and decision-making.</div></div>
+
+<div class="grid3">
+<div class="card"><h4>Ontologies</h4><p>Formal representations of concepts and their relationships within a domain. They define what exists and how things relate to each other.</p></div>
+<div class="card teal"><h4>Knowledge graphs</h4><p>Network structures that store entities and their relationships. Google's Knowledge Graph powers search results with factual information.</p></div>
+<div class="card amber"><h4>Commonsense knowledge</h4><p>Basic facts about the physical world that humans take for granted — objects fall when dropped, water is wet, people have goals. Encoding this remains challenging.</p></div>
+</div>
+
+<div class="callout warning" style="margin-top:24px"><strong>The knowledge bottleneck</strong><p>Knowledge-based systems require extensive manual encoding of facts and rules. This made expert systems expensive to build and maintain. Modern machine learning approaches learn representations from data, partially addressing this bottleneck but raising questions about transparency and reliability.</p></div>
+</div></section>
+
+<section class="alt" id="planning"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 03</div><h2 class="sec-title display">Planning and decision-making.</h2><p>An "agent" is any entity (artificial or not) that perceives and takes actions in the world. A rational agent has goals or preferences and takes actions to make them happen. In automated planning, the agent has a specific goal. In automated decision-making, the agent has preferences over outcomes and assigns utilities to them.</p></div>
+
+<div class="definition"><div class="term">Agent</div><div class="meaning">Any entity that perceives its environment and takes actions to achieve goals or maximize expected utility.</div></div>
+
+<div class="grid2">
+<div class="card"><h3>Automated planning</h3><p>Finding a sequence of actions that will achieve a goal. Planning algorithms search through possible action sequences, considering preconditions, effects, and constraints.</p>
+<p><strong>Applications:</strong> Robot navigation, logistics, manufacturing scheduling, space missions</p></div>
+<div class="card teal"><h3>Decision-making under uncertainty</h3><p>When outcomes are uncertain, agents must make decisions that maximize expected utility. This requires probabilistic models and decision theory.</p>
+<p><strong>Applications:</strong> Medical diagnosis, financial trading, autonomous vehicles, game playing</p></div>
+</div>
+
+<div class="diagram" style="margin-top:24px">
+<svg viewBox="0 0 900 200" role="img" aria-label="Agent perception-action cycle">
+<rect x="50" y="50" width="200" height="100" rx="12" fill="#0b1626"/>
+<text x="150" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Environment</text>
+<text x="150" y="120" text-anchor="middle" fill="#a9bdd4" font-size="12">State, sensors</text>
+<line x1="250" y1="100" x2="350" y2="100" stroke="#6c5ce7" stroke-width="3" marker-end="url(#arrowhead)"/>
+<text x="300" y="90" text-anchor="middle" fill="#566579" font-size="12">Percepts</text>
+<rect x="350" y="50" width="200" height="100" rx="12" fill="#6c5ce7"/>
+<text x="450" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Agent</text>
+<text x="450" y="120" text-anchor="middle" fill="#d9d3ff" font-size="12">Reasoning, planning</text>
+<line x1="550" y1="100" x2="650" y2="100" stroke="#10a5a0" stroke-width="3" marker-end="url(#arrowhead)"/>
+<text x="600" y="90" text-anchor="middle" fill="#566579" font-size="12">Actions</text>
+<rect x="650" y="50" width="200" height="100" rx="12" fill="#10a5a0"/>
+<text x="750" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Outcome</text>
+<text x="750" y="120" text-anchor="middle" fill="#c9ecea" font-size="12">New state, reward</text>
+<path d="M 750 150 Q 750 180 450 180 Q 150 180 150 150" stroke="#f0a32b" stroke-width="2" fill="none" stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+<text x="450" y="195" text-anchor="middle" fill="#f0a32b" font-size="11">Feedback loop</text>
+<defs><marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><polygon points="0 0, 10 3, 0 6" fill="#6c5ce7"/></marker></defs>
+</svg>
+<div class="diagram-caption">Figure 02 · The agent perception-action cycle</div>
+</div>
+
+<div class="callout teal" style="margin-top:24px"><strong>Rational agents</strong><p>A rational agent is one that acts to maximize its expected utility given its beliefs about the world. This framework, drawn from economics and decision theory, provides a mathematical foundation for understanding intelligent behavior.</p></div>
+</div></section>
+
+<section id="learning"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 04</div><h2 class="sec-title display">Learning.</h2><p>Machine learning is the study of programs that can improve their performance on a given task automatically. It has been a part of AI from the beginning.</p></div>
+
+<div class="definition"><div class="term">Machine Learning</div><div class="meaning">A subset of AI where systems learn patterns or mappings from data, improving their performance on tasks without being explicitly programmed for every case.</div></div>
+
+<div class="grid3">
+<div class="card"><h4>Supervised learning</h4><p>Learning from labeled examples — the training data includes both inputs and desired outputs. The system learns to predict outputs for new inputs.</p>
+<p><strong>Examples:</strong> Image classification, spam detection, medical diagnosis</p></div>
+<div class="card teal"><h4>Unsupervised learning</h4><p>Finding patterns in data without labeled outputs. The system discovers structure, clusters, or representations.</p>
+<p><strong>Examples:</strong> Customer segmentation, anomaly detection, dimensionality reduction</p></div>
+<div class="card amber"><h4>Reinforcement learning</h4><p>Learning through interaction with an environment. The agent takes actions, receives rewards or penalties, and learns policies that maximize cumulative reward.</p>
+<p><strong>Examples:</strong> Game playing, robotics, autonomous driving</p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>Why learning matters</strong><p>Learning addresses the knowledge bottleneck by allowing systems to acquire capabilities from data rather than manual programming. Modern AI's success is largely due to advances in machine learning, particularly deep learning. → <a href="04-machine-learning.html">Note 04: Machine Learning &amp; Neural Networks</a></p></div>
+</div></section>
+
+<section class="alt" id="nlp"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 05</div><h2 class="sec-title display">Natural language processing.</h2><p>Natural language processing (NLP) allows programs to read, write, and communicate in human languages. Specific problems include speech recognition, speech synthesis, machine translation, information extraction, and question answering.</p></div>
+
+<div class="definition"><div class="term">NLP</div><div class="meaning">The field concerned with enabling computers to understand, interpret, and generate human language in useful ways.</div></div>
+
+<table><thead><tr><th>NLP Task</th><th>Description</th><th>Current Status</th></tr></thead><tbody>
+<tr><td>Speech recognition</td><td>Converting spoken language to text</td><td>Highly accurate in quiet conditions</td></tr>
+<tr><td>Speech synthesis</td><td>Generating natural-sounding speech from text</td><td>Very natural, nearly indistinguishable from humans</td></tr>
+<tr><td>Machine translation</td><td>Translating text between languages</td><td>Good for common languages, struggles with nuance</td></tr>
+<tr><td>Sentiment analysis</td><td>Determining emotional tone in text</td><td>Effective for obvious sentiment, subtle cases harder</td></tr>
+<tr><td>Question answering</td><td>Answering questions based on provided or retrieved information</td><td>Improved dramatically with LLMs, but can hallucinate</td></tr>
+<tr><td>Text generation</td><td>Producing coherent, relevant text</td><td>Fluent but not always factual or logical</td></tr>
+</tbody></table>
+
+<div class="callout warning" style="margin-top:24px"><strong>The ambiguity problem</strong><p>Human language is inherently ambiguous. Words have multiple meanings, sentences can be parsed in different ways, and meaning depends on context, tone, and shared knowledge. Modern large language models handle ambiguity through statistical patterns learned from massive text corpora, but they can still fail on subtle cases or produce plausible-sounding but incorrect outputs.</p></div>
+</div></section>
+
+<section id="perception"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 06</div><h2 class="sec-title display">Perception.</h2><p>Machine perception is the ability to use input from sensors (cameras, microphones, wireless signals, sonar, lidar, and tactile sensors) to deduce aspects of the world.</p></div>
+
+<div class="definition"><div class="term">Machine Perception</div><div class="meaning">The ability of AI systems to interpret sensory data and extract meaningful information about the environment.</div></div>
+
+<div class="grid3">
+<div class="card"><h4>Computer vision</h4><p>Recognizing objects, faces, scenes, and activities in images and video. Deep learning has achieved superhuman performance on many visual recognition tasks.</p></div>
+<div class="card teal"><h4>Speech processing</h4><p>Recognizing spoken words, understanding prosody and emotion, separating speakers in noisy environments.</p></div>
+<div class="card amber"><h4>Multimodal perception</h4><p>Combining multiple sensory inputs (vision, audio, touch) to build a richer understanding of the environment.</p></div>
+</div>
+
+<div class="callout teal" style="margin-top:24px"><strong>From pixels to meaning</strong><p>Perception involves multiple levels of processing: low-level (edges, textures), mid-level (shapes, parts), and high-level (objects, scenes, actions). Deep neural networks learn these representations automatically, but understanding <em>why</em> they make specific decisions remains challenging.</p></div>
+</div></section>
+
+<section class="alt" id="social"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 07</div><h2 class="sec-title display">Social intelligence.</h2><p>Kismet, a robot head made in the 1990s, is a machine that can recognize and simulate emotions. Affective computing is a field that comprises systems that recognize, interpret, process, or simulate human feelings.</p></div>
+
+<div class="definition"><div class="term">Social Intelligence</div><div class="meaning">The ability to recognize, understand, and respond appropriately to human emotions, social cues, and interpersonal dynamics.</div></div>
+
+<div class="grid2">
+<div class="card"><h3>Emotion recognition</h3><p>Detecting emotions from facial expressions, voice tone, body language, and text. Used in customer service, mental health monitoring, and human-robot interaction.</p>
+<p><strong>Challenges:</strong> Cultural variation, individual differences, context dependence</p></div>
+<div class="card teal"><h3>Social simulation</h3><p>Generating appropriate emotional responses and social behavior. Important for chatbots, virtual assistants, and social robots that interact with humans.</p>
+<p><strong>Challenges:</strong> Avoiding uncanny valley, maintaining consistency, ethical concerns about deception</p></div>
+</div>
+
+<div class="callout rose" style="margin-top:24px"><strong>Ethical considerations</strong><p>Systems that simulate emotions and social cues raise important ethical questions. Can they manipulate users? Should they disclose they are not human? → <a href="07-ethics-risks.html">Note 07: Ethics, Risks &amp; Harms</a> examines these concerns in detail.</p></div>
+</div></section>
+
+<section id="general"><div class="wrap"><div class="sec-head"><div class="eyebrow">Goal 08</div><h2 class="sec-title display">General intelligence.</h2><p>Some companies, such as OpenAI, Google DeepMind, and Meta, aim to create artificial general intelligence (AGI) — AI that can complete nearly any cognitive task at least as well as a human.</p></div>
+
+<div class="definition"><div class="term">Artificial General Intelligence</div><div class="meaning">Hypothetical AI systems with broad cognitive capabilities across many domains, able to learn and apply knowledge flexibly like humans.</div></div>
+
+<div class="grid2">
+<div class="card rose"><h3>Narrow AI (current)</h3><p>Systems that excel at specific tasks but cannot generalize broadly. Examples: chess engines, image classifiers, language models. These systems are highly capable within their domain but lack the flexibility of human intelligence.</p></div>
+<div class="card amber"><h3>General AI (future goal)</h3><p>Systems that can learn any task a human can learn, transfer knowledge between domains, reason abstractly, and adapt to novel situations. This remains an open research challenge with no clear timeline.</p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>The AGI debate</strong><p>Experts disagree on whether AGI is achievable, when it might occur, and how to define it precisely. Some argue current foundation models are steps toward AGI; others believe fundamentally new approaches are needed. → <a href="09-philosophy-future.html">Note 09: Philosophy &amp; Future</a> explores these questions in depth.</p></div>
+</div></section>
+
+<section class="alt" id="relationships"><div class="wrap"><div class="sec-head"><div class="eyebrow">Connections</div><h2 class="sec-title display">How the goals relate to each other.</h2></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 400" role="img" aria-label="Relationships between AI goals">
+<!-- Central node -->
+<circle cx="450" cy="200" r="60" fill="#6c5ce7"/>
+<text x="450" y="205" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">General Intelligence</text>
+<!-- Surrounding goals -->
+<circle cx="200" cy="100" r="45" fill="#10a5a0"/>
+<text x="200" y="105" text-anchor="middle" fill="#fff" font-size="13">Reasoning</text>
+<circle cx="450" cy="50" r="45" fill="#f0a32b"/>
+<text x="450" y="55" text-anchor="middle" fill="#0b1626" font-size="13">Knowledge</text>
+<circle cx="700" cy="100" r="45" fill="#e05a6b"/>
+<text x="700" y="105" text-anchor="middle" fill="#fff" font-size="13">Planning</text>
+<circle cx="150" cy="250" r="45" fill="#10a5a0"/>
+<text x="150" y="255" text-anchor="middle" fill="#fff" font-size="13">Learning</text>
+<circle cx="350" cy="350" r="45" fill="#f0a32b"/>
+<text x="350" y="355" text-anchor="middle" fill="#0b1626" font-size="13">NLP</text>
+<circle cx="550" cy="350" r="45" fill="#e05a6b"/>
+<text x="550" y="355" text-anchor="middle" fill="#fff" font-size="13">Perception</text>
+<circle cx="750" cy="250" r="45" fill="#10a5a0"/>
+<text x="750" y="255" text-anchor="middle" fill="#fff" font-size="13">Social</text>
+<!-- Connections -->
+<line x1="240" y1="120" x2="400" y2="180" stroke="#a9bdd4" stroke-width="2"/>
+<line x1="450" y1="95" x2="450" y2="140" stroke="#a9bdd4" stroke-width="2"/>
+<line x1="660" y1="120" x2="500" y2="180" stroke="#a9bdd4" stroke-width="2"/>
+<line x1="195" y1="230" x2="390" y2="210" stroke="#a9bdd4" stroke-width="2"/>
+<line x1="380" y1="320" x2="430" y2="250" stroke="#a9bdd4" stroke-width="2"/>
+<line x1="520" y1="320" x2="470" y2="250" stroke="#a9bdd4" stroke-width="2"/>
+<line x1="710" y1="230" x2="510" y2="210" stroke="#a9bdd4" stroke-width="2"/>
+</svg>
+<div class="diagram-caption">Figure 03 · The eight goals form an interconnected system, with general intelligence as the ultimate aim</div>
+</div>
+
+<div class="grid2" style="margin-top:28px">
+<div class="card"><h3>Interdependencies</h3><p>Many goals depend on others. Planning requires reasoning about actions and their consequences. Learning requires representing knowledge. Natural language processing requires understanding meaning and context. Perception requires learning to recognize patterns.</p></div>
+<div class="card teal"><h3>Progress varies by goal</h3><p>Some goals have seen remarkable progress (perception, narrow learning tasks), while others remain challenging (general intelligence, commonsense reasoning, robust planning in complex environments). Progress is not uniform across all goals.</p></div>
+</div>
+</div></section>
+
+<section class="dark" id="takeaways"><div class="wrap"><div class="sec-head center"><div class="eyebrow">End of note</div><h2 class="sec-title display">Remember these ideas.</h2></div>
+<div class="takeaways">
+<div class="takeaway"><div class="n">01</div><p>AI research pursues eight traditional goals: reasoning, knowledge representation, planning, learning, NLP, perception, social intelligence, and general intelligence.</p></div>
+<div class="takeaway"><div class="n">02</div><p>Reasoning and planning enable agents to make decisions and achieve goals, but face computational challenges like combinatorial explosion.</p></div>
+<div class="takeaway"><div class="n">03</div><p>Learning from data (machine learning) has become the dominant paradigm, addressing the knowledge bottleneck of earlier symbolic approaches.</p></div>
+<div class="takeaway"><div class="n">04</div><p>Perception and NLP have achieved remarkable progress with deep learning, but challenges remain in handling ambiguity and edge cases.</p></div>
+<div class="takeaway"><div class="n">05</div><p>General intelligence (AGI) remains an open challenge — current AI systems are narrow specialists, not general problem-solvers.</p></div>
+</div>
+</div></section>
+
+<section id="glossary"><div class="wrap"><div class="sec-head"><div class="eyebrow">Reference</div><h2 class="sec-title display">Glossary</h2></div>
+<div class="glossary">
+<div><b>Agent</b><span>An entity that perceives its environment and takes actions to achieve goals.</span></div>
+<div><b>Ontology</b><span>A formal representation of concepts and relationships within a domain.</span></div>
+<div><b>Combinatorial Explosion</b><span>Exponential growth in problem complexity that makes exhaustive search infeasible.</span></div>
+<div><b>Machine Learning</b><span>Systems that improve performance on tasks through experience with data.</span></div>
+<div><b>Supervised Learning</b><span>Learning from labeled examples with known correct outputs.</span></div>
+<div><b>Unsupervised Learning</b><span>Finding patterns in data without labeled outputs.</span></div>
+<div><b>Reinforcement Learning</b><span>Learning optimal behavior through trial-and-error interaction with an environment.</span></div>
+<div><b>NLP</b><span>Natural language processing — enabling computers to understand and generate human language.</span></div>
+<div><b>Computer Vision</b><span>Extracting meaningful information from images and video.</span></div>
+<div><b>Affective Computing</b><span>Systems that recognize, interpret, or simulate emotions.</span></div>
+<div><b>AGI</b><span>Artificial general intelligence — broad cognitive capability across many domains.</span></div>
+<div><b>Narrow AI</b><span>AI systems specialized for specific tasks without broad generalization.</span></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="wrap"><div class="sec-head"><div class="eyebrow">Navigation</div><h2 class="sec-title display">Continue learning.</h2></div>
+<div class="internal-nav">
+<a href="01-foundations.html"><div class="dir">← Previous</div><strong>01 · Foundations of AI</strong><p class="muted">Review the definition, history, and evolution of artificial intelligence</p></a>
+<a href="03-traditional-techniques.html"><div class="dir">Next →</div><strong>03 · Traditional AI Techniques</strong><p class="muted">Explore search, logic, probability, and classification methods</p></a>
+</div>
+<div class="related" style="margin-top:28px">
+<a href="04-machine-learning.html"><div class="tag">Learning</div><div class="t">Machine Learning &amp; Neural Networks</div><div class="d">How systems learn from data</div></a>
+<a href="05-modern-systems.html"><div class="tag">Systems</div><div class="t">Modern AI Systems</div><div class="d">Generative AI, agents, and the AI stack</div></a>
+<a href="09-philosophy-future.html"><div class="tag">Philosophy</div><div class="t">Philosophy &amp; Future of AI</div><div class="d">Questions about consciousness and AGI</div></a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-in"><div class="mono"><strong>02 · THE GOALS OF AI RESEARCH</strong><br>Knowledge Base · Note 02 of 09</div><div class="mono">Source: Wikipedia · September 2026</div></div></footer>
+</body></html>

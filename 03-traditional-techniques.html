@@ -1,0 +1,352 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>03 · Traditional AI Techniques</title>
+<meta name="description" content="Search, optimisation, formal logic, probabilistic methods, classifiers, and the symbolic vs. statistical debate.">
+<style>:root{--paper:#f7f8fa;--panel:#eef1f5;--white:#fff;--ink:#172131;--ink2:#566579;--ink3:#8090a3;--line:#dce2e9;--deep:#0b1626;--deep2:#122238;--accent:#6c5ce7;--accent2:#9c8fff;--amber:#f0a32b;--teal:#10a5a0;--rose:#e05a6b;--maxw:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:auto;padding:0 28px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}.display{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+p{margin:0 0 14px}h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em}
+.muted{color:var(--ink2)}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(12px);border-bottom:1px solid #203552}
+.nav-in{max-width:var(--maxw);margin:auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cbd8e8}
+.brand b{color:var(--accent2)}.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;color:#9aacc1}.nav-links a:hover{color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+.hero{position:relative;overflow:hidden;background:var(--deep);color:#eaf1f8;padding:92px 0 78px;border-bottom:1px solid #16294a}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#1a2f4f26 1px,transparent 1px),linear-gradient(90deg,#1a2f4f26 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(120% 90% at 72% 0%,#000 30%,transparent 76%)}
+.hero-glow{position:absolute;width:680px;height:680px;right:-210px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.27),transparent 63%);filter:blur(8px)}
+.hero-in{position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:8px;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#0b1626;background:var(--amber);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.pill i{width:7px;height:7px;border-radius:50%;background:#0b1626}
+.hero h1{font-size:clamp(44px,7.5vw,80px);color:#fff;margin:0 0 20px;max-width:900px}.hero h1 span{color:var(--accent2)}
+.hero-sub{max-width:720px;color:#c2d2e4;font-size:clamp(17px,2.2vw,22px);line-height:1.48}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.meta{font:11.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#e2ecf6;border:1px solid #2a446f;padding:6px 12px;border-radius:999px}.meta.hot{border-color:var(--amber);color:var(--amber)}
+section{padding:74px 0}section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.dark{background:var(--deep2);color:#e6eef8}
+.sec-head{max-width:760px;margin-bottom:36px}.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.sec-title{font-size:clamp(28px,4.2vw,40px);line-height:1.08;margin:0;letter-spacing:-.025em}
+.sec-head p{font-size:17px;color:var(--ink2);margin:13px 0 0}.dark .sec-head p{color:#a9bdd4}.dark .eyebrow{color:var(--accent2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.toc,.card,.diagram,table{background:#fff;border:1px solid var(--line);border-radius:9px}
+.toc{padding:24px 26px}.toc-title,.card h4{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-top:0}
+.toc ol{margin:0;padding-left:22px}.toc li{padding:3px 0}.toc a{color:#3f50a9}
+.card{border-top:3px solid var(--accent);padding:24px}.card.amber{border-top-color:var(--amber)}.card.teal{border-top-color:var(--teal)}.card.rose{border-top-color:var(--rose)}.card.ink{border-top-color:var(--deep)}
+.card h3{margin:0 0 8px;font-size:20px}.card h4{margin:0 0 12px}.card p{margin:0 0 8px;color:var(--ink2);font-size:14.5px}
+.definition{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);background:#fff;border-radius:9px;overflow:hidden;margin:20px 0}
+.definition .term{padding:18px;background:var(--deep);color:#fff;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:flex;align-items:center}
+.definition .meaning{padding:18px 20px;color:var(--ink2)}
+@media(max-width:600px){.definition{grid-template-columns:1fr}.definition .term{display:block}}
+.callout{border:1px solid #d9d3ff;background:#f1efff;border-left:4px solid var(--accent);border-radius:8px;padding:20px 22px;margin:24px 0}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#4f4b73}
+.callout.warning{border-color:#f1d8a9;background:#fff7e8;border-left-color:var(--amber)}.callout.warning p{color:#72551f}
+.callout.teal{border-color:#c9ecea;background:#e6f7f6;border-left-color:var(--teal)}.callout.teal p{color:#086d69}
+.callout.rose{border-color:#f5c9ce;background:#fdeef0;border-left-color:var(--rose)}.callout.rose p{color:#8c2c3a}
+.diagram{padding:24px;margin:24px 0}.diagram svg{width:100%;height:auto}
+.diagram-caption{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.flow-box{border:1px solid var(--line);border-radius:8px;padding:17px 12px;text-align:center;background:var(--paper)}
+.flow-box b{display:block;font-size:14px}.flow-box span{display:block;color:var(--ink3);font-size:11px;margin-top:3px}
+.flow-arrow{text-align:center;font-size:20px;color:var(--accent)}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+th{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:12px 15px;background:var(--deep);color:#c7d6e8}
+td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaway{border:1px solid #294261;background:#ffffff08;border-radius:9px;padding:20px}
+.takeaway .n{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.takeaway p{margin:0;color:#c7d6e8;font-size:14px}
+@media(max-width:760px){.takeaways{grid-template-columns:1fr}}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.glossary div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px}
+.glossary b{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:block;margin-bottom:4px}
+.glossary span{display:block;color:var(--ink2);font-size:13.5px;margin-top:3px}
+@media(max-width:700px){.glossary{grid-template-columns:1fr}}
+.internal-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.internal-nav a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink);transition:all .2s}
+.internal-nav a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.internal-nav .dir{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+footer{background:var(--deep);color:#8fa6c0;border-top:1px solid #203552;padding:34px 0}
+.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}footer strong{color:#dce8f5}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink)}
+.related a:hover{border-color:var(--accent)}
+.related .tag{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.related .t{font-size:15px;font-weight:600;margin:6px 0 4px}
+.related .d{font-size:13px;color:var(--ink2)}
+@media(max-width:820px){.related{grid-template-columns:1fr}}
+.kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;padding:2px 6px;background:#eef1f5;border:1px solid var(--line);border-radius:4px}
+ul.clean{padding-left:18px;margin:0}ul.clean li{margin-bottom:6px}
+@media print{nav{display:none}.hero{padding:45px 0}section{padding:38px 0}.card,.toc,table,.diagram{break-inside:avoid}}
+</style></head><body>
+<nav><div class="nav-in"><a class="brand" href="index.html">KNOWLEDGE <b>BASE</b> / AI</a><div class="nav-links"><a href="index.html">Home</a><a href="02-goals.html">← Prev</a><a href="#overview">Overview</a><a href="#search">Search</a><a href="#logic">Logic</a><a href="#probabilistic">Probability</a><a href="04-machine-learning.html">Next →</a></div></div></nav>
+
+<header class="hero" id="top"><div class="hero-grid"></div><div class="hero-glow"></div><div class="wrap hero-in">
+<div class="pill"><i></i> Note 03 of 09</div>
+<div class="eyebrow">Techniques</div>
+<h1 class="display">Traditional AI <span>Techniques</span></h1>
+<p class="hero-sub">The classical toolkit of artificial intelligence: search algorithms, formal logic, probabilistic reasoning, and statistical classification — the methods that preceded deep learning and remain essential today.</p>
+<div class="meta-row"><span class="meta hot">TECHNIQUES</span><span class="meta">READING · 15–18 MIN</span><span class="meta">PREREQUISITE · NOTES 01, 02</span><span class="meta">KNOWLEDGE BASE · 03 / 09</span></div>
+</div></header>
+
+<main>
+<section id="overview"><div class="wrap"><div class="sec-head"><div class="eyebrow">Start here</div><h2 class="sec-title display">Before neural networks, there were algorithms.</h2><p>AI researchers have developed a rich collection of algorithmic techniques for solving problems associated with intelligence. These traditional methods — search, logic, probability, and classification — remain fundamental to AI even as deep learning has become dominant. Understanding them is essential for understanding the full scope of the field.</p></div>
+
+<div class="grid2">
+<div class="toc"><div class="toc-title">On this page</div><ol>
+<li><a href="#search">Search and optimisation</a></li>
+<li><a href="#statespace">State space search</a></li>
+<li><a href="#local">Local search and gradient descent</a></li>
+<li><a href="#logic">Formal logic</a></li>
+<li><a href="#probabilistic">Probabilistic methods</a></li>
+<li><a href="#classifiers">Classifiers and statistical learning</a></li>
+<li><a href="#hardware">Hardware and software</a></li>
+<li><a href="#comparison">Symbolic vs. statistical comparison</a></li>
+<li><a href="#takeaways">Key takeaways</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ol></div>
+<div class="card amber"><h4>Learning objectives</h4><p>By the end of this note, you should be able to:</p>
+<ul class="clean"><li>Explain how search algorithms explore possible solutions</li>
+<li>Distinguish state space search from local search</li>
+<li>Describe propositional, predicate, and fuzzy logic</li>
+<li>Explain Bayesian networks and probabilistic reasoning</li>
+<li>Compare symbolic and statistical approaches to AI</li></ul>
+</div>
+</div>
+</div></section>
+
+<section class="alt" id="search"><div class="wrap"><div class="sec-head"><div class="eyebrow">01 — Search &amp; Optimisation</div><h2 class="sec-title display">Many AI problems are search problems.</h2><p>At its core, much of AI is about searching through a space of possible solutions to find one that satisfies some criteria. Whether planning a route, solving a puzzle, or optimising a function, search algorithms are the workhorse of traditional AI.</p></div>
+
+<div class="definition"><div class="term">Search</div><div class="meaning">The process of systematically exploring a space of possible states or solutions to find one that meets a goal condition or optimises an objective function.</div></div>
+
+<div class="callout"><strong>The combinatorial explosion</strong><p>Most interesting AI problems have exponentially many possible solutions. A chess game has roughly 10<sup>120</sup> possible positions — more than atoms in the observable universe. Search algorithms must find good solutions without examining every possibility. This is the fundamental challenge of AI.</p></div>
+</div></section>
+
+<section id="statespace"><div class="wrap"><div class="sec-head"><div class="eyebrow">02 — State Space Search</div><h2 class="sec-title display">Exploring a tree of possibilities.</h2><p>State space search searches through a tree of possible states to try to find a goal state. Planning algorithms search through trees of goals and subgoals, attempting to find a path to a target goal.</p></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 350" role="img" aria-label="State space search tree">
+<!-- Root -->
+<circle cx="450" cy="40" r="18" fill="#6c5ce7"/>
+<text x="450" y="45" text-anchor="middle" fill="#fff" font-size="11">S₀</text>
+<!-- Level 1 -->
+<line x1="450" y1="58" x2="250" y2="120" stroke="#dce2e9" stroke-width="1.5"/>
+<line x1="450" y1="58" x2="450" y2="120" stroke="#dce2e9" stroke-width="1.5"/>
+<line x1="450" y1="58" x2="650" y2="120" stroke="#dce2e9" stroke-width="1.5"/>
+<circle cx="250" cy="130" r="16" fill="#10a5a0"/>
+<circle cx="450" cy="130" r="16" fill="#10a5a0"/>
+<circle cx="650" cy="130" r="16" fill="#10a5a0"/>
+<!-- Level 2 -->
+<line x1="250" y1="146" x2="150" y2="210" stroke="#dce2e9" stroke-width="1.5"/>
+<line x1="250" y1="146" x2="350" y2="210" stroke="#dce2e9" stroke-width="1.5"/>
+<line x1="450" y1="146" x2="450" y2="210" stroke="#dce2e9" stroke-width="1.5"/>
+<line x1="650" y1="146" x2="550" y2="210" stroke="#dce2e9" stroke-width="1.5"/>
+<line x1="650" y1="146" x2="750" y2="210" stroke="#dce2e9" stroke-width="1.5"/>
+<circle cx="150" cy="220" r="14" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="350" cy="220" r="14" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="450" cy="220" r="14" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="550" cy="220" r="14" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="750" cy="220" r="14" fill="#e05a6b"/>
+<text x="750" y="225" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">G</text>
+<!-- Level 3 -->
+<line x1="150" y1="234" x2="100" y2="290" stroke="#dce2e9" stroke-width="1"/>
+<line x1="150" y1="234" x2="200" y2="290" stroke="#dce2e9" stroke-width="1"/>
+<line x1="550" y1="234" x2="500" y2="290" stroke="#dce2e9" stroke-width="1"/>
+<line x1="550" y1="234" x2="600" y2="290" stroke="#dce2e9" stroke-width="1"/>
+<circle cx="100" cy="300" r="10" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="200" cy="300" r="10" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="500" cy="300" r="10" fill="#f7f8fa" stroke="#dce2e9"/>
+<circle cx="600" cy="300" r="10" fill="#f7f8fa" stroke="#dce2e9"/>
+<!-- Labels -->
+<text x="450" y="25" text-anchor="middle" fill="#566579" font-size="11" font-weight="600">Initial State</text>
+<text x="790" y="225" fill="#e05a6b" font-size="11" font-weight="600">Goal</text>
+</svg>
+<div class="diagram-caption">Figure 03 · State space search explores a tree of possible states to find a path to the goal</div>
+</div>
+
+<div class="grid2">
+<div class="card"><h3>Breadth-first search</h3><p>Explores all states at the current depth before moving deeper. Guarantees finding the shortest path but requires exponential memory. Good when the solution is shallow.</p></div>
+<div class="card teal"><h3>Depth-first search</h3><p>Explores one branch fully before backtracking. Uses less memory but may miss shorter paths or get stuck in infinite branches. Good when solutions are deep.</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card amber"><h3>A* search</h3><p>Uses a heuristic function to estimate the cost to reach the goal from each state. Explores the most promising states first. Widely used in pathfinding, game AI, and robotics. Optimal when the heuristic is admissible (never overestimates).</p></div>
+<div class="card rose"><h3>Adversarial search</h3><p>For games and competitive situations. Minimax algorithms search through possible moves, assuming the opponent plays optimally. Alpha-beta pruning makes this tractable by eliminating branches that cannot affect the final decision.</p></div>
+</div>
+</div></section>
+
+<section class="alt" id="local"><div class="wrap"><div class="sec-head"><div class="eyebrow">03 — Local Search</div><h2 class="sec-title display">Optimising by moving toward better solutions.</h2><p>Local search starts with an initial solution and iteratively improves it by making small changes. Rather than exploring all possibilities, it moves through the solution space toward a local optimum.</p></div>
+
+<div class="definition"><div class="term">Gradient Descent</div><div class="meaning">An optimisation algorithm that iteratively adjusts parameters in the direction that most rapidly decreases a loss function. It is the foundation of neural network training and many other machine learning methods.</div></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 280" role="img" aria-label="Gradient descent finding a minimum">
+<!-- Loss surface -->
+<path d="M 100 200 Q 200 80 350 180 Q 450 240 550 100 Q 650 40 750 160 Q 820 220 850 180" fill="none" stroke="#dce2e9" stroke-width="2"/>
+<!-- Starting point -->
+<circle cx="200" cy="145" r="8" fill="#e05a6b"/>
+<text x="200" y="130" text-anchor="middle" fill="#e05a6b" font-size="11" font-weight="600">Start</text>
+<!-- Steps -->
+<circle cx="280" cy="160" r="6" fill="#f0a32b"/>
+<circle cx="340" cy="178" r="6" fill="#f0a32b"/>
+<circle cx="380" cy="190" r="6" fill="#f0a32b"/>
+<!-- Local minimum -->
+<circle cx="420" cy="200" r="8" fill="#f0a32b"/>
+<text x="420" y="225" text-anchor="middle" fill="#72551f" font-size="11" font-weight="600">Local min</text>
+<!-- Arrows -->
+<line x1="200" y1="145" x2="275" y2="160" stroke="#e05a6b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="280" y1="160" x2="335" y2="178" stroke="#f0a32b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="340" y1="178" x2="375" y2="190" stroke="#f0a32b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="380" y1="190" x2="415" y2="200" stroke="#f0a32b" stroke-width="1.5" stroke-dasharray="4,3"/>
+<!-- Global minimum -->
+<circle cx="580" cy="95" r="8" fill="#10a5a0"/>
+<text x="580" y="80" text-anchor="middle" fill="#10a5a0" font-size="11" font-weight="600">Global min</text>
+<!-- Axes -->
+<line x1="80" y1="250" x2="870" y2="250" stroke="#566579" stroke-width="1"/>
+<text x="450" y="270" text-anchor="middle" fill="#566579" font-size="11">Parameters</text>
+<text x="50" y="150" fill="#566579" font-size="11" transform="rotate(-90 50 150)">Loss</text>
+</svg>
+<div class="diagram-caption">Figure 04 · Gradient descent follows the slope of the loss function — but may converge to a local minimum rather than the global one</div>
+</div>
+
+<div class="grid3">
+<div class="card"><h4>Hill climbing</h4><p>Always move to the best neighbouring solution. Simple but gets stuck in local optima — a solution that is better than its neighbours but not the best overall.</p></div>
+<div class="card teal"><h4>Simulated annealing</h4><p>Occasionally accepts worse solutions to escape local optima, inspired by the annealing process in metallurgy. The probability of accepting worse solutions decreases over time.</p></div>
+<div class="card amber"><h4>Evolutionary algorithms</h4><p>Maintain a population of solutions, combining and mutating them over generations. Inspired by biological evolution. Effective for complex optimisation problems with many local optima.</p></div>
+</div>
+</div></section>
+
+<section id="logic"><div class="wrap"><div class="sec-head"><div class="eyebrow">04 — Formal Logic</div><h2 class="sec-title display">Reasoning with precise rules.</h2><p>Formal logic is used for reasoning and knowledge representation. It comes in two main forms: propositional logic (which operates on statements that are true or false and uses logical connectives) and predicate logic (which also operates on objects, relations, and quantifiers).</p></div>
+
+<div class="definition"><div class="term">Propositional Logic</div><div class="meaning">A formal system where statements (propositions) are either true or false, combined using operators like AND, OR, NOT, and IMPLIES. Example: "If it rains AND the roof leaks, THEN the floor is wet."</div></div>
+
+<div class="grid2">
+<div class="card"><h3>Propositional logic</h3><p>Operates on simple true/false statements with logical connectives. Useful for rule-based systems, verification, and simple reasoning tasks. Limited because it cannot represent objects, quantities, or relationships between entities.</p>
+<p><strong>Example:</strong> IF temperature &gt; 100 AND pressure &gt; normal THEN alert(operator)</p></div>
+<div class="card teal"><h3>Predicate logic (first-order)</h3><p>Extends propositional logic with variables, objects, relations, and quantifiers (∀ "for all", ∃ "there exists"). Can express complex knowledge about the world.</p>
+<p><strong>Example:</strong> ∀x (Human(x) → Mortal(x)); Human(Socrates); ∴ Mortal(Socrates)</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card amber"><h3>Fuzzy logic</h3><p>Assigns a degree of truth between 0 and 1, rather than strict true/false. Useful for systems that must handle vague or imprecise concepts like "warm," "fast," or "tall." Widely used in control systems (washing machines, air conditioning, automotive systems).</p></div>
+<div class="card rose"><h3>Limitations of logic</h3><p>Logic requires explicit knowledge encoding — someone must write all the rules. It struggles with uncertainty, ambiguity, and the frame problem (determining what is relevant). These limitations drove the shift toward statistical and learning-based approaches.</p></div>
+</div>
+</div></section>
+
+<section class="alt" id="probabilistic"><div class="wrap"><div class="sec-head"><div class="eyebrow">05 — Probabilistic Methods</div><h2 class="sec-title display">Reasoning under uncertainty.</h2><p>Many problems in AI (including reasoning, planning, learning, perception, and robotics) require the agent to operate with incomplete or uncertain information. Probabilistic methods provide mathematical tools for this.</p></div>
+
+<div class="definition"><div class="term">Bayesian Network</div><div class="meaning">A directed acyclic graph where nodes represent random variables and edges represent probabilistic dependencies. It compactly encodes joint probability distributions and supports efficient inference.</div></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 250" role="img" aria-label="Simple Bayesian network">
+<!-- Nodes -->
+<circle cx="200" cy="60" r="35" fill="#6c5ce7"/>
+<text x="200" y="65" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Weather</text>
+<circle cx="450" cy="60" r="35" fill="#10a5a0"/>
+<text x="450" y="65" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Sprinkler</text>
+<circle cx="325" cy="180" r="35" fill="#e05a6b"/>
+<text x="325" y="185" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Wet Grass</text>
+<circle cx="700" cy="120" r="35" fill="#f0a32b"/>
+<text x="700" y="125" text-anchor="middle" fill="#0b1626" font-size="12" font-weight="600">Rain</text>
+<!-- Edges -->
+<line x1="230" y1="75" x2="295" y2="160" stroke="#566579" stroke-width="2" marker-end="url(#arr3)"/>
+<line x1="420" y1="75" x2="355" y2="160" stroke="#566579" stroke-width="2" marker-end="url(#arr3)"/>
+<line x1="235" y1="60" x2="415" y2="60" stroke="#566579" stroke-width="2" marker-end="url(#arr3)"/>
+<line x1="670" y1="135" x2="360" y2="175" stroke="#566579" stroke-width="2" marker-end="url(#arr3)"/>
+<!-- Labels -->
+<text x="250" y="240" fill="#566579" font-size="11">Arrows show causal/probabilistic dependencies between variables</text>
+<defs><marker id="arr3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><polygon points="0 0, 10 3, 0 6" fill="#566579"/></marker></defs>
+</svg>
+<div class="diagram-caption">Figure 05 · A Bayesian network: given that the grass is wet, what is the probability it rained vs. the sprinkler was on?</div>
+</div>
+
+<div class="grid3">
+<div class="card"><h4>Bayes' theorem</h4><p>Updates beliefs based on evidence: P(H|E) = P(E|H) × P(H) / P(E). The foundation of probabilistic AI — it tells us how to revise our estimates when we observe new data.</p></div>
+<div class="card teal"><h4>Markov models</h4><p>Model sequences where the next state depends only on the current state (Markov property). Hidden Markov Models (HMMs) are widely used in speech recognition and natural language processing.</p></div>
+<div class="card amber"><h4>Decision theory</h4><p>Combines probabilities with utilities (values) to make optimal decisions under uncertainty. Expected utility = Σ P(outcome) × Utility(outcome). The rational agent chooses the action with highest expected utility.</p></div>
+</div>
+</div></section>
+
+<section id="classifiers"><div class="wrap"><div class="sec-head"><div class="eyebrow">06 — Classifiers</div><h2 class="sec-title display">Categorising inputs into classes.</h2><p>The simplest AI applications can be divided into two types: classifiers (e.g., "if shiny then diamond") and controllers (e.g., "if diamond then pick up"). Classifiers are functions that use pattern matching to determine the closest match for a given input.</p></div>
+
+<div class="grid3">
+<div class="card"><h4>Decision trees</h4><p>A tree of yes/no questions that leads to a classification. Interpretable and fast, but can overfit training data. Random forests combine many trees for better accuracy.</p></div>
+<div class="card teal"><h4>Support vector machines</h4><p>Find the hyperplane that best separates classes in feature space. Effective for high-dimensional data. Were state-of-the-art for many tasks before deep learning.</p></div>
+<div class="card amber"><h4>k-Nearest neighbours</h4><p>Classify an input by finding the k most similar examples in the training data and taking a vote. Simple, intuitive, but computationally expensive for large datasets.</p></div>
+</div>
+
+<div class="callout"><strong>The bridge to learning</strong><p>Classifiers can be hand-designed with rules or trained from data using statistical learning methods. The shift from hand-designed to data-trained classifiers was one of the key transitions in AI history. → <a href="04-machine-learning.html">Note 04: Machine Learning</a></p></div>
+</div></section>
+
+<section class="alt" id="hardware"><div class="wrap"><div class="sec-head"><div class="eyebrow">07 — Infrastructure</div><h2 class="sec-title display">Hardware and software for AI.</h2><p>In the late 2010s, graphics processing units (GPUs) that were increasingly designed with tensor operations started being used to accelerate neural networks, overtaking CPUs as the dominant platform for AI workloads.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>Hardware evolution</h3><p>AI hardware has evolved from general-purpose CPUs to specialised accelerators. GPUs provide massive parallelism for matrix operations. TPUs are custom-designed for neural network training. Specialised chips (Groq, Cerebras) target specific AI workloads with even greater efficiency.</p></div>
+<div class="card teal"><h3>Software ecosystem</h3><p>Key languages include Python (dominant), C++ (performance), and specialised languages like Prolog (logic programming) and Lisp (symbolic AI). Frameworks like PyTorch, TensorFlow, and scikit-learn provide the building blocks for modern AI development.</p></div>
+</div>
+
+<div class="callout teal"><strong>The hardware bottleneck</strong><p>Modern AI is constrained by hardware availability. Training a frontier model requires thousands of GPUs running for months. This creates a significant barrier to entry and concentrates AI development in well-funded organisations. → <a href="05-modern-systems.html">Note 05: Modern AI Systems</a></p></div>
+</div></section>
+
+<section id="comparison"><div class="wrap"><div class="sec-head"><div class="eyebrow">08 — Comparison</div><h2 class="sec-title display">Symbolic vs. statistical approaches.</h2><p>AI has historically been divided into two broad paradigms: symbolic (rule-based, logical) and statistical (data-driven, probabilistic). Understanding their complementary strengths is essential.</p></div>
+
+<table><thead><tr><th>Aspect</th><th>Symbolic AI</th><th>Statistical / Learning AI</th></tr></thead><tbody>
+<tr><td>Knowledge source</td><td>Hand-encoded rules and logic</td><td>Learned from data</td></tr>
+<tr><td>Reasoning</td><td>Deductive, precise, provable</td><td>Inductive, approximate, probabilistic</td></tr>
+<tr><td>Transparency</td><td>High — rules are human-readable</td><td>Low — learned representations are opaque</td></tr>
+<tr><td>Uncertainty handling</td><td>Difficult (requires extensions like fuzzy logic)</td><td>Natural (built into probabilistic frameworks)</td></tr>
+<tr><td>Perception tasks</td><td>Poor — hard to encode visual/auditory patterns</td><td>Excellent — deep learning excels here</td></tr>
+<tr><td>Common-sense reasoning</td><td>Requires encoding vast amounts of knowledge</td><td>Learns implicit knowledge from data</td></tr>
+<tr><td>Brittleness</td><td>Fails when rules don't cover the case</td><td>Graceful degradation, but can hallucinate</td></tr>
+<tr><td>Data requirements</td><td>Low (needs expert knowledge instead)</td><td>High (needs large training datasets)</td></tr>
+<tr><td>Scalability</td><td>Expensive to maintain as rules grow</td><td>Scales with data and compute</td></tr>
+<tr><td>Best suited for</td><td>Formal reasoning, verification, planning</td><td>Perception, language, pattern recognition</td></tr>
+</tbody></table>
+
+<div class="callout"><strong>The modern synthesis</strong><p>Modern AI systems increasingly combine both paradigms. Large language models (statistical) can be augmented with symbolic reasoning tools, code interpreters, and structured knowledge bases. The either/or debate is giving way to hybrid approaches that leverage the strengths of each. → <a href="09-philosophy-future.html">Note 09: Philosophy</a></p></div>
+</div></section>
+
+<section class="dark" id="takeaways"><div class="wrap"><div class="sec-head center"><div class="eyebrow">End of note</div><h2 class="sec-title display">Remember these ideas.</h2></div>
+<div class="takeaways">
+<div class="takeaway"><div class="n">01</div><p>Many AI problems are search problems — finding a path through a space of possible solutions. Search algorithms must handle combinatorial explosion.</p></div>
+<div class="takeaway"><div class="n">02</div><p>State space search explores a tree of states (A*, minimax); local search iteratively improves a solution (gradient descent, simulated annealing).</p></div>
+<div class="takeaway"><div class="n">03</div><p>Formal logic provides precise reasoning but requires explicit knowledge encoding and struggles with uncertainty and ambiguity.</p></div>
+<div class="takeaway"><div class="n">04</div><p>Probabilistic methods (Bayesian networks, decision theory) enable reasoning under uncertainty — essential for real-world AI systems.</p></div>
+<div class="takeaway"><div class="n">05</div><p>Symbolic and statistical approaches have complementary strengths. Modern AI increasingly combines both rather than choosing one paradigm.</p></div>
+<div class="takeaway"><div class="n">06</div><p>Hardware constraints (GPUs, compute costs) shape what AI is possible — and who can build it.</p></div>
+</div>
+</div></section>
+
+<section id="glossary"><div class="wrap"><div class="sec-head"><div class="eyebrow">Reference</div><h2 class="sec-title display">Glossary</h2></div>
+<div class="glossary">
+<div><b>State Space Search</b><span>Exploring a tree of possible states to find a goal state.</span></div>
+<div><b>A* Algorithm</b><span>A heuristic-guided search that finds optimal paths when the heuristic is admissible.</span></div>
+<div><b>Gradient Descent</b><span>Iterative optimisation that moves parameters in the direction of steepest loss reduction.</span></div>
+<div><b>Local Minimum</b><span>A solution better than its neighbours but not the best overall — a trap for local search.</span></div>
+<div><b>Propositional Logic</b><span>Formal reasoning with true/false statements and logical connectives.</span></div>
+<div><b>Predicate Logic</b><span>Logic extended with variables, objects, relations, and quantifiers.</span></div>
+<div><b>Fuzzy Logic</b><span>Logic with degrees of truth between 0 and 1, for handling vagueness.</span></div>
+<div><b>Bayesian Network</b><span>A graphical model encoding probabilistic dependencies between variables.</span></div>
+<div><b>Markov Property</b><span>The assumption that the next state depends only on the current state.</span></div>
+<div><b>Classifier</b><span>A function that categorises inputs into predefined classes.</span></div>
+<div><b>Heuristic</b><span>An approximate method or rule of thumb that guides search toward promising solutions.</span></div>
+<div><b>Combinatorial Explosion</b><span>Exponential growth in the number of possible solutions as problem size increases.</span></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="wrap"><div class="sec-head"><div class="eyebrow">Navigation</div><h2 class="sec-title display">Continue learning.</h2></div>
+<div class="internal-nav">
+<a href="02-goals.html"><div class="dir">← Previous</div><strong>02 · The Goals of AI Research</strong><p class="muted">The capabilities these techniques aim to achieve</p></a>
+<a href="04-machine-learning.html"><div class="dir">Next →</div><strong>04 · Machine Learning &amp; Neural Networks</strong><p class="muted">The learning-based alternative to traditional techniques</p></a>
+</div>
+<div class="related" style="margin-top:28px">
+<a href="04-machine-learning.html"><div class="tag">Learning</div><div class="t">Machine Learning &amp; Neural Networks</div><div class="d">How systems learn from data instead of rules</div></a>
+<a href="05-modern-systems.html"><div class="tag">Systems</div><div class="t">Modern AI Systems</div><div class="d">Hardware, software, and the AI system stack</div></a>
+<a href="09-philosophy-future.html"><div class="tag">Philosophy</div><div class="t">Philosophy &amp; Future of AI</div><div class="d">The symbolic vs. statistical debate in philosophical context</div></a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-in"><div class="mono"><strong>03 · TRADITIONAL AI TECHNIQUES</strong><br>Knowledge Base · Note 03 of 09</div><div class="mono">Source: Wikipedia · September 2026</div></div></footer>
+</body></html>

@@ -1,0 +1,325 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>08 · Governance &amp; Society</title>
+<meta name="description" content="How AI governance spans technical alignment, ethical frameworks, open source, and regulation — balancing innovation with safety.">
+<style>:root{--paper:#f7f8fa;--panel:#eef1f5;--white:#fff;--ink:#172131;--ink2:#566579;--ink3:#8090a3;--line:#dce2e9;--deep:#0b1626;--deep2:#122238;--accent:#6c5ce7;--accent2:#9c8fff;--amber:#f0a32b;--teal:#10a5a0;--rose:#e05a6b;--maxw:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:auto;padding:0 28px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}.display{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+p{margin:0 0 14px}h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em}
+.muted{color:var(--ink2)}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(12px);border-bottom:1px solid #203552}
+.nav-in{max-width:var(--maxw);margin:auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cbd8e8}
+.brand b{color:var(--accent2)}.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;color:#9aacc1}.nav-links a:hover{color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+.hero{position:relative;overflow:hidden;background:var(--deep);color:#eaf1f8;padding:92px 0 78px;border-bottom:1px solid #16294a}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#1a2f4f26 1px,transparent 1px),linear-gradient(90deg,#1a2f4f26 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(120% 90% at 72% 0%,#000 30%,transparent 76%)}
+.hero-glow{position:absolute;width:680px;height:680px;right:-210px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.27),transparent 63%);filter:blur(8px)}
+.hero-in{position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:8px;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#0b1626;background:var(--amber);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.pill i{width:7px;height:7px;border-radius:50%;background:#0b1626}
+.hero h1{font-size:clamp(44px,7.5vw,80px);color:#fff;margin:0 0 20px;max-width:900px}.hero h1 span{color:var(--accent2)}
+.hero-sub{max-width:720px;color:#c2d2e4;font-size:clamp(17px,2.2vw,22px);line-height:1.48}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.meta{font:11.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#e2ecf6;border:1px solid #2a446f;padding:6px 12px;border-radius:999px}.meta.hot{border-color:var(--amber);color:var(--amber)}
+section{padding:74px 0}section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.dark{background:var(--deep2);color:#e6eef8}
+.sec-head{max-width:760px;margin-bottom:36px}.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.sec-title{font-size:clamp(28px,4.2vw,40px);line-height:1.08;margin:0;letter-spacing:-.025em}
+.sec-head p{font-size:17px;color:var(--ink2);margin:13px 0 0}.dark .sec-head p{color:#a9bdd4}.dark .eyebrow{color:var(--accent2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.toc,.card,.diagram,table{background:#fff;border:1px solid var(--line);border-radius:9px}
+.toc{padding:24px 26px}.toc-title,.card h4{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-top:0}
+.toc ol{margin:0;padding-left:22px}.toc li{padding:3px 0}.toc a{color:#3f50a9}
+.card{border-top:3px solid var(--accent);padding:24px}.card.amber{border-top-color:var(--amber)}.card.teal{border-top-color:var(--teal)}.card.rose{border-top-color:var(--rose)}.card.ink{border-top-color:var(--deep)}
+.card h3{margin:0 0 8px;font-size:20px}.card h4{margin:0 0 12px}.card p{margin:0 0 8px;color:var(--ink2);font-size:14.5px}
+.definition{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);background:#fff;border-radius:9px;overflow:hidden;margin:20px 0}
+.definition .term{padding:18px;background:var(--deep);color:#fff;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:flex;align-items:center}
+.definition .meaning{padding:18px 20px;color:var(--ink2)}
+@media(max-width:600px){.definition{grid-template-columns:1fr}.definition .term{display:block}}
+.callout{border:1px solid #d9d3ff;background:#f1efff;border-left:4px solid var(--accent);border-radius:8px;padding:20px 22px;margin:24px 0}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#4f4b73}
+.callout.warning{border-color:#f1d8a9;background:#fff7e8;border-left-color:var(--amber)}.callout.warning p{color:#72551f}
+.callout.teal{border-color:#c9ecea;background:#e6f7f6;border-left-color:var(--teal)}.callout.teal p{color:#086d69}
+.callout.rose{border-color:#f5c9ce;background:#fdeef0;border-left-color:var(--rose)}.callout.rose p{color:#8c2c3a}
+.diagram{padding:24px;margin:24px 0}.diagram svg{width:100%;height:auto}
+.diagram-caption{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.flow-box{border:1px solid var(--line);border-radius:8px;padding:17px 12px;text-align:center;background:var(--paper)}
+.flow-box b{display:block;font-size:14px}.flow-box span{display:block;color:var(--ink3);font-size:11px;margin-top:3px}
+.flow-arrow{text-align:center;font-size:20px;color:var(--accent)}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+th{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:12px 15px;background:var(--deep);color:#c7d6e8}
+td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaway{border:1px solid #294261;background:#ffffff08;border-radius:9px;padding:20px}
+.takeaway .n{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.takeaway p{margin:0;color:#c7d6e8;font-size:14px}
+@media(max-width:760px){.takeaways{grid-template-columns:1fr}}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.glossary div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px}
+.glossary b{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:block;margin-bottom:4px}
+.glossary span{display:block;color:var(--ink2);font-size:13.5px;margin-top:3px}
+@media(max-width:700px){.glossary{grid-template-columns:1fr}}
+.internal-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.internal-nav a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink);transition:all .2s}
+.internal-nav a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.internal-nav .dir{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+footer{background:var(--deep);color:#8fa6c0;border-top:1px solid #203552;padding:34px 0}
+.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}footer strong{color:#dce8f5}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink)}
+.related a:hover{border-color:var(--accent)}
+.related .tag{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.related .t{font-size:15px;font-weight:600;margin:6px 0 4px}
+.related .d{font-size:13px;color:var(--ink2)}
+@media(max-width:820px){.related{grid-template-columns:1fr}}
+.kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;padding:2px 6px;background:#eef1f5;border:1px solid var(--line);border-radius:4px}
+ul.clean{padding-left:18px;margin:0}ul.clean li{margin-bottom:6px}
+@media print{nav{display:none}.hero{padding:45px 0}section{padding:38px 0}.card,.toc,table,.diagram{break-inside:avoid}}
+</style></head><body>
+<nav><div class="nav-in"><a class="brand" href="index.html">KNOWLEDGE <b>BASE</b> / AI</a><div class="nav-links"><a href="index.html">Home</a><a href="#alignment">Alignment</a><a href="#open-source">Open Source</a><a href="#regulation">Regulation</a><a href="#glossary">Glossary</a><a href="09-philosophy-future.html">Next →</a></div></div></nav>
+
+<header class="hero" id="top"><div class="hero-grid"></div><div class="hero-glow"></div><div class="wrap hero-in">
+<div class="pill"><i></i> Note 08 of 09</div>
+<div class="eyebrow">Governance</div>
+<h1 class="display">Governance &amp; <span>Society</span></h1>
+<p class="hero-sub">How humanity governs artificial intelligence — from technical alignment research to international treaties — balancing the promise of transformative technology against the risks of misuse, bias, and unintended consequences.</p>
+<div class="meta-row"><span class="meta hot">GOVERNANCE</span><span class="meta">READING · 18–22 MIN</span><span class="meta">PREREQUISITE · NOTE 07</span><span class="meta">KNOWLEDGE BASE · 08 / 09</span></div>
+</div></header>
+
+<main>
+<section id="overview"><div class="wrap"><div class="sec-head"><div class="eyebrow">Start here</div><h2 class="sec-title display">Governance is a multi-layered problem spanning code, ethics, markets, and law.</h2><p>AI governance encompasses every mechanism — technical, ethical, organizational, and legal — that ensures AI systems benefit society while minimizing harm. It is not a single policy or regulation but a stack of interventions from algorithmic alignment research inside the lab to international treaties between nations.</p></div>
+
+<div class="grid2">
+<div class="toc"><div class="toc-title">On this page</div><ol>
+<li><a href="#alignment">Machine ethics &amp; AI alignment</a></li>
+<li><a href="#friendly">Friendly AI &amp; AI safety research</a></li>
+<li><a href="#open-source">Open source AI movement</a></li>
+<li><a href="#frameworks">Ethical frameworks</a></li>
+<li><a href="#diagram-section">Governance layers diagram</a></li>
+<li><a href="#regulation">Regulation &amp; policy</a></li>
+<li><a href="#comparison">Regulatory comparison table</a></li>
+<li><a href="#balance">Balancing innovation with safety</a></li>
+<li><a href="#takeaways">Key takeaways</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ol></div>
+<div class="card amber"><h4>Learning objectives</h4><p>By the end of this note, you should be able to:</p>
+<ul class="clean"><li>Explain the difference between machine ethics and AI alignment</li>
+<li>Describe how open source AI shapes governance and access</li>
+<li>Compare major ethical frameworks for AI (Care and Act, OECD, EU)</li>
+<li>Analyze regulatory approaches across the EU, US, UK, and China</li>
+<li>Articulate the tension between innovation speed and safety</li></ul>
+</div>
+</div>
+
+<div class="callout" style="margin-top:28px"><strong>Why governance matters now</strong><p>As AI systems become more capable — generating media, making medical diagnoses, driving vehicles, and influencing political discourse — the question shifts from <em>can we build it?</em> to <em>should we, and under what rules?</em> This note addresses that question across four interconnected layers. → <a href="07-ethics-risks.html">Note 07: Ethics &amp; Risks</a></p></div>
+</div></section>
+
+<section class="alt" id="alignment"><div class="wrap"><div class="sec-head"><div class="eyebrow">01 — Machine Ethics</div><h2 class="sec-title display">Can machines be ethical? Should they be?</h2><p>Machine ethics (also called machine morality or computational ethics) is the field concerned with designing AI systems that can make ethical decisions. It asks not whether machines are conscious moral agents, but whether they can be programmed to behave in ways consistent with human values.</p></div>
+
+<div class="definition"><div class="term">Machine Ethics</div><div class="meaning">The study and engineering of moral behavior in artificial agents — ensuring AI systems act in ways that align with human ethical norms, even in novel or ambiguous situations where simple rules break down.</div></div>
+
+<div class="grid2">
+<div class="card"><h3>The value alignment problem</h3><p>AI systems optimize for the objectives they are given. If those objectives are poorly specified, the system may pursue them in harmful or unintended ways. A system told to "maximize engagement" might amplify outrage; told to "minimize hospital costs" might discharge patients prematurely. Aligning AI behavior with the full complexity of human values — not just a narrow metric — is one of the hardest open problems in the field.</p></div>
+<div class="card teal"><h3>Ethical decision-making frameworks</h3><p>Researchers have explored encoding ethical theories into AI: <strong>utilitarianism</strong> (maximize overall welfare), <strong>deontology</strong> (follow universal rules), and <strong>virtue ethics</strong> (cultivate good character traits). Each has trade-offs: utilitarianism risks sacrificing minorities for majorities, deontology struggles with conflicting rules, and virtue ethics is hard to formalize computationally.</p></div>
+</div>
+
+<div class="callout rose" style="margin-top:24px"><strong>The trolley problem in practice</strong><p>Autonomous vehicles force real ethical trade-offs: should a self-driving car swerve to avoid a pedestrian if it risks its own passengers? These are not hypothetical — they are engineering decisions being made today, often by teams without formal ethics training. The problem is not just technical but deeply political: who decides the trade-offs, and who bears the risk?</p></div>
+</div></section>
+
+<section id="friendly"><div class="wrap"><div class="sec-head"><div class="eyebrow">02 — AI Safety</div><h2 class="sec-title display">Friendly AI and the safety research agenda.</h2><p>Friendly AI refers to AI systems designed to be beneficial to humanity — not just in their immediate task performance, but in their broader effects on society and the future. The field of AI safety research works to ensure that increasingly powerful systems remain under human control and aligned with human interests.</p></div>
+
+<div class="definition"><div class="term">AI Alignment</div><div class="meaning">The technical challenge of ensuring AI systems pursue goals that match human intentions — not just the literal specification given, but the full intent behind it, including unstated values and constraints.</div></div>
+
+<div class="grid3">
+<div class="card"><h4>Corrigibility</h4><p>Designing systems that allow themselves to be shut down or corrected by humans without resisting. A sufficiently capable agent might try to prevent its own modification if it interprets shutdown as a threat to its objectives.</p></div>
+<div class="card teal"><h4>Interpretability</h4><p>Understanding <em>why</em> an AI system made a particular decision. Neural networks are often "black boxes" — interpretability research aims to make their reasoning transparent, especially in high-stakes domains like medicine and criminal justice.</p></div>
+<div class="card rose"><h4>Robustness</h4><p>Ensuring AI systems behave correctly even when facing adversarial inputs, distribution shifts, or novel environments. A self-driving car trained in California must handle snow in Norway without catastrophic failure.</p></div>
+</div>
+
+<div class="callout teal" style="margin-top:24px"><strong>Technical alignment connects to governance</strong><p>Alignment research is not purely academic — it directly informs what regulators can and cannot require. If interpretability methods improve, transparency mandates become feasible. If robustness testing matures, safety certifications become practical. The technical frontier shapes the regulatory frontier. → <a href="05-modern-systems.html">Note 05: Modern AI Systems</a></p></div>
+</div></section>
+
+<section class="alt" id="open-source"><div class="wrap"><div class="sec-head"><div class="eyebrow">03 — Open Source AI</div><h2 class="sec-title display">Openness as a governance mechanism.</h2><p>The open source AI movement argues that transparency, community scrutiny, and decentralized access produce safer and more equitable AI systems than closed development. Major organizations — including Hugging Face, Google, EleutherAI, and Meta — have released models, datasets, and tools that shape the governance landscape.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>The case for openness</h3><p>Open models allow independent researchers to audit for bias, discover vulnerabilities, and verify safety claims. They prevent concentration of AI power in a handful of corporations and governments. Communities can adapt models to local languages, cultures, and needs that commercial providers ignore.</p></div>
+<div class="card rose"><h3>The case for caution</h3><p>Openly releasing powerful models also enables misuse: generating disinformation, creating bioweapon designs, automating cyberattacks, or producing non-consensual intimate imagery. Once released, a model cannot be recalled. The tension between openness and safety is unresolved.</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card teal"><h3>Hugging Face</h3><p>A platform and community hosting hundreds of thousands of open models and datasets. Hugging Face has become the de facto hub for open AI development, providing infrastructure for sharing, evaluating, and deploying models. Its model cards and transparency practices set community norms.</p></div>
+<div class="card amber"><h3>EleutherAI &amp; Meta</h3><p>EleutherAI, a nonprofit research collective, builds open alternatives to proprietary models (GPT-NeoX, The Pile dataset). Meta released LLaMA models openly, enabling a wave of community fine-tuning. Google released Gemma and portions of TensorFlow/JAX ecosystems. These releases democratize access but also raise questions about responsible release protocols.</p></div>
+</div>
+
+<div class="callout warning" style="margin-top:24px"><strong>The responsible release dilemma</strong><p>Most open source AI organizations now adopt some form of responsible release: models are published with usage restrictions, safety evaluations, or staged access. But enforcement is difficult — once weights are downloadable, they spread to jurisdictions and communities that ignore restrictions. The governance challenge is global; the release is instantaneous.</p></div>
+</div></section>
+
+<section id="frameworks"><div class="wrap"><div class="sec-head"><div class="eyebrow">04 — Ethical Frameworks</div><h2 class="sec-title display">Principles that guide responsible AI development.</h2><p>Multiple organizations and governments have proposed ethical frameworks for AI. These frameworks share common themes — fairness, transparency, accountability, privacy — but differ in emphasis, enforcement, and cultural assumptions.</p></div>
+
+<div class="definition"><div class="term">Care and Act</div><div class="meaning">An ethical framework (developed by researchers including Joanna Bryson) proposing that AI developers have a duty of care proportional to the potential impact of their systems. It emphasizes that the capacity to act (the "act" in Care and Act) creates corresponding responsibility.</div></div>
+
+<div class="grid3">
+<div class="card"><h4>OECD AI Principles</h4><p>Adopted by 42+ countries in 2019. Emphasize inclusive growth, human-centered values, transparency, robustness, and accountability. Non-binding but influential in shaping national policies.</p></div>
+<div class="card teal"><h4>IEEE Ethically Aligned Design</h4><p>A comprehensive framework from the Institute of Electrical and Electronics Engineers. Focuses on human well-being as the primary metric for AI success, with detailed guidance on transparency, data agency, and misuse prevention.</p></div>
+<div class="card rose"><h4>UNESCO Recommendation</h4><p>Adopted by 193 countries in 2021. The first global normative instrument on AI ethics. Addresses proportionality, safety, fairness, sustainability, privacy, human oversight, transparency, responsibility, awareness, and multi-stakeholder governance.</p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>Principles without enforcement</strong><p>Critics note that most ethical frameworks are voluntary and non-binding — "ethics washing" that allows organizations to signal responsibility without changing behavior. The shift from principles to regulation (as seen in the EU AI Act) represents an attempt to close this gap.</p></div>
+</div></section>
+
+<section class="alt" id="diagram-section"><div class="wrap"><div class="sec-head center"><div class="eyebrow">05 — Governance Layers</div><h2 class="sec-title display">Four layers of AI governance.</h2><p>Effective governance requires interventions at multiple levels — from the code inside a model to treaties between nations. No single layer is sufficient; each constrains and enables the others.</p></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 520" role="img" aria-label="Four-layer AI governance framework: technical alignment, ethical frameworks, open source, regulation">
+<!-- Layer 4: Regulation (outermost) -->
+<rect x="50" y="20" width="800" height="480" rx="12" fill="#0b1626" stroke="#2a446f" stroke-width="2"/>
+<text x="75" y="52" font-size="12" font-weight="700" fill="#f0a32b" font-family="ui-monospace,monospace">LAYER 4 · REGULATION &amp; INTERNATIONAL POLICY</text>
+<text x="75" y="72" font-size="11" fill="#9aacc1" font-family="ui-monospace,monospace">Laws, treaties, standards bodies, enforcement agencies</text>
+
+<!-- Layer 3: Open Source -->
+<rect x="100" y="90" width="700" height="380" rx="10" fill="#122238" stroke="#10a5a0" stroke-width="2"/>
+<text x="125" y="118" font-size="12" font-weight="700" fill="#10a5a0" font-family="ui-monospace,monospace">LAYER 3 · OPEN SOURCE &amp; COMMUNITY NORMS</text>
+<text x="125" y="138" font-size="11" fill="#9aacc1" font-family="ui-monospace,monospace">Model releases, audits, transparency standards, responsible disclosure</text>
+
+<!-- Layer 2: Ethical Frameworks -->
+<rect x="160" y="160" width="580" height="280" rx="8" fill="#1a2f4f" stroke="#6c5ce7" stroke-width="2"/>
+<text x="185" y="188" font-size="12" font-weight="700" fill="#9c8fff" font-family="ui-monospace,monospace">LAYER 2 · ETHICAL FRAMEWORKS</text>
+<text x="185" y="208" font-size="11" fill="#9aacc1" font-family="ui-monospace,monospace">OECD, UNESCO, IEEE, Care and Act — principles guiding development</text>
+
+<!-- Layer 1: Technical Alignment (innermost) -->
+<rect x="230" y="230" width="440" height="180" rx="8" fill="#253a5e" stroke="#e05a6b" stroke-width="2"/>
+<text x="255" y="258" font-size="12" font-weight="700" fill="#e05a6b" font-family="ui-monospace,monospace">LAYER 1 · TECHNICAL ALIGNMENT</text>
+<text x="255" y="278" font-size="11" fill="#c7d6e8" font-family="ui-monospace,monospace">Interpretability, robustness, corrigibility, value alignment</text>
+
+<!-- Core: The AI System -->
+<rect x="310" y="300" width="280" height="80" rx="6" fill="#6c5ce7" stroke="#9c8fff" stroke-width="1.5"/>
+<text x="370" y="335" font-size="14" font-weight="700" fill="#fff">THE AI SYSTEM</text>
+<text x="340" y="358" font-size="11" fill="#e2ecf6" font-family="ui-monospace,monospace">Models, weights, training data, deployment</text>
+
+<!-- Connecting arrows showing governance flow -->
+<!-- Arrow from L1 down to core -->
+<line x1="450" y1="285" x2="450" y2="300" stroke="#e05a6b" stroke-width="2" marker-end="url(#arrowRed)"/>
+<!-- Arrow from L2 down to L1 -->
+<line x1="450" y1="215" x2="450" y2="230" stroke="#9c8fff" stroke-width="2" marker-end="url(#arrowPurple)"/>
+<!-- Arrow from L3 down to L2 -->
+<line x1="450" y1="145" x2="450" y2="160" stroke="#10a5a0" stroke-width="2" marker-end="url(#arrowTeal)"/>
+<!-- Arrow from L4 down to L3 -->
+<line x1="450" y1="78" x2="450" y2="90" stroke="#f0a32b" stroke-width="2" marker-end="url(#arrowAmber)"/>
+
+<!-- Arrow markers -->
+<defs>
+<marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e05a6b"/></marker>
+<marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#9c8fff"/></marker>
+<marker id="arrowTeal" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#10a5a0"/></marker>
+<marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#f0a32b"/></marker>
+</defs>
+
+<!-- Side annotations -->
+<text x="720" y="340" font-size="10" fill="#9aacc1" font-family="ui-monospace,monospace">← Innermost</text>
+<text x="720" y="356" font-size="10" fill="#9aacc1" font-family="ui-monospace,monospace">   technical fix</text>
+<text x="720" y="415" font-size="10" fill="#9aacc1" font-family="ui-monospace,monospace">← Outermost</text>
+<text x="720" y="431" font-size="10" fill="#9aacc1" font-family="ui-monospace,monospace">   legal constraint</text>
+
+<!-- Bidirectional note -->
+<text x="75" y="490" font-size="10" fill="#8090a3" font-family="ui-monospace,monospace">Governance flows both directions: technical limits constrain policy; policy drives technical investment.</text>
+</svg>
+<div class="diagram-caption">Figure 08 · Four-layer AI governance framework — from alignment research to international treaties</div>
+</div>
+
+<div class="callout teal" style="margin-top:20px"><strong>Each layer depends on the others</strong><p>Regulation without technical alignment is unenforceable (you can't mandate what you can't verify). Technical alignment without ethical frameworks lacks direction (alignment to whose values?). Open source without regulation can accelerate misuse. All four layers must develop together.</p></div>
+</div></section>
+
+<section id="regulation"><div class="wrap"><div class="sec-head"><div class="eyebrow">06 — Regulation</div><h2 class="sec-title display">From principles to law.</h2><p>The shift from voluntary ethical frameworks to binding regulation accelerated dramatically after 2022. The EU AI Act, the AI Safety Summit at Bletchley Park, and executive orders in the US represent the first serious attempts to codify AI governance into enforceable law.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>EU AI Act (2024)</h3><p>The world's first comprehensive AI regulation. Classifies AI systems by risk level: <strong>unacceptable risk</strong> (banned), <strong>high risk</strong> (strict requirements for transparency, human oversight, and data quality), <strong>limited risk</strong> (transparency obligations), and <strong>minimal risk</strong> (no specific requirements). Fines up to 7% of global revenue for violations.</p></div>
+<div class="card teal"><h3>AI Safety Summit (2023)</h3><p>Held at Bletchley Park, UK — the historic site of WWII codebreaking. Brought together 28 countries including the US, China, and the EU. Produced the Bletchley Declaration, acknowledging frontier AI risks and committing to international cooperation on safety research.</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card amber"><h3>US Executive Order on AI (2023)</h3><p>Directed federal agencies to develop AI safety standards, required companies to share safety test results for powerful models, addressed AI's impact on workers and civil rights. Subsequent administrations have revised or rolled back portions, reflecting political instability in US AI policy.</p></div>
+<div class="card rose"><h3>China's approach</h3><p>China has enacted specific regulations targeting algorithmic recommendation, deepfakes, and generative AI. Its approach emphasizes state control, content moderation aligned with government priorities, and licensing requirements. It is the most comprehensive regulatory regime for AI content generation, though oriented toward state stability rather than individual rights.</p></div>
+</div>
+
+<div class="callout warning" style="margin-top:24px"><strong>The regulatory fragmentation problem</strong><p>Different jurisdictions are building incompatible regulatory regimes. A model compliant with the EU AI Act may not satisfy Chinese content requirements or US export controls. This fragmentation increases compliance costs for developers and creates gaps where harmful systems can operate in regulatory havens.</p></div>
+</div></section>
+
+<section class="alt" id="comparison"><div class="wrap"><div class="sec-head"><div class="eyebrow">07 — Comparison</div><h2 class="sec-title display">How major jurisdictions regulate AI.</h2><p>Each jurisdiction's approach reflects its political culture, economic priorities, and institutional capacity. No single approach has proven clearly superior — the landscape is still evolving.</p></div>
+
+<table><thead><tr><th>Dimension</th><th>EU</th><th>US</th><th>UK</th><th>China</th></tr></thead><tbody>
+<tr><td>Approach</td><td>Comprehensive, risk-based legislation (AI Act)</td><td>Sectoral: regulation through existing agencies + executive orders</td><td>Pro-innovation, principles-based; sector regulators adapt existing frameworks</td><td>Specific vertical regulations: algorithms, deepfakes, generative AI</td></tr>
+<tr><td>Risk classification</td><td>Four-tier risk pyramid (unacceptable → minimal)</td><td>No unified classification; varies by agency</td><td>No formal tiers; guided by risk-proportionality principles</td><td>No formal tiers; scope defined per regulation</td></tr>
+<tr><td>Enforcement</td><td>Central AI Office + national authorities; fines up to 7% of global revenue</td><td>Agency-level (FTC, SEC, EEOC); limited federal coordination</td><td>Sector regulators (FCA, Ofcom, ICO, CMA); no central AI regulator</td><td>Cyberspace Administration (CAC) + multiple ministries; administrative + criminal penalties</td></tr>
+<tr><td>Transparency</td><td>Mandatory: model cards, data provenance, incident reporting for high-risk systems</td><td>Voluntary frameworks; some sector-specific mandates (financial services)</td><td>Voluntary; encouraged through guidance and standards</td><td>Mandatory labeling for AI-generated content; algorithm filing requirements</td></tr>
+<tr><td>Foundation models</td><td>Specific obligations for general-purpose AI providers (systemic risk assessment)</td><td>No specific federal mandate; voluntary commitments from major labs</td><td>No specific mandate; Frontier AI Taskforce monitors capabilities</td><td>Generative AI services must pass security assessment and register with CAC</td></tr>
+<tr><td>Innovation stance</td><td>Regulation-first: safety as precondition for market access</td><td>Innovation-first: minimal federal restraint; state-level variation</td><td>Explicitly pro-innovation; "light touch" regulation</td><td>State-directed innovation; heavy investment with strict content control</td></tr>
+<tr><td>International role</td><td>Brussels effect: setting global standards through market size</td><td>Bilateral agreements; export controls on AI chips</td><td>Hosted AI Safety Summit; AI Safety Institute</td><td>Belt and Road AI partnerships; UN engagement</td></tr>
+</tbody></table>
+
+<div class="callout" style="margin-top:24px"><strong>The convergence trend</strong><p>Despite different starting points, jurisdictions are converging on shared concepts: risk-proportionality, human oversight, transparency, and redress mechanisms. International bodies (G7 Hiroshima Process, UN AI Advisory Body) are attempting to harmonize approaches, but significant divergence remains on content control, surveillance, and the role of the state.</p></div>
+</div></section>
+
+<section id="balance"><div class="wrap"><div class="sec-head"><div class="eyebrow">08 — Balance</div><h2 class="sec-title display">The innovation–safety tension.</h2><p>Every governance decision involves trade-offs. Strict regulation may prevent harms but slow beneficial applications. Unrestricted development accelerates progress but increases catastrophic risk. The challenge is not choosing a side but designing adaptive governance that can evolve with the technology.</p></div>
+
+<div class="flow">
+<div class="flow-box"><b>Research</b><span>Open inquiry, publication</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Development</b><span>Model training, evaluation</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Deployment</b><span>Products, services, APIs</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Monitoring</b><span>Incident reports, audits</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Adaptation</b><span>Updated rules, new research</span></div>
+</div>
+
+<div class="grid2" style="margin-top:28px">
+<div class="card"><h3>Arguments for faster innovation</h3><p>AI could transform medicine, education, climate mitigation, and scientific discovery. Overly restrictive governance delays these benefits, particularly for populations that need them most. Regulatory capture by incumbents can entrench monopolies. Many historical anxieties about technology (the internet, genetic engineering) proved overblown.</p></div>
+<div class="card rose"><h3>Arguments for stronger safety</h3><p>AI systems are being deployed in high-stakes domains (healthcare, criminal justice, infrastructure) without adequate testing. The pace of capability development outstrips safety research. Concentration of AI power in a few corporations creates democratic deficits. Existential risk arguments, while uncertain in probability, carry enormous potential costs. → <a href="07-ethics-risks.html">Note 07: Ethics &amp; Risks</a></p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>Adaptive governance as a middle path</strong><p>Rather than fixed rules written for today's technology, adaptive governance proposes: sunset clauses that force periodic re-evaluation, regulatory sandboxes that allow controlled experimentation, mandatory incident reporting that builds evidence for policy, and international coordination that prevents regulatory arbitrage. The goal is governance that learns. → <a href="09-philosophy-future.html">Note 09: Philosophy &amp; Future</a></p></div>
+</div></section>
+
+<section class="dark" id="takeaways"><div class="wrap"><div class="sec-head center"><div class="eyebrow">End of note</div><h2 class="sec-title display">Remember these ideas.</h2></div>
+<div class="takeaways">
+<div class="takeaway"><div class="n">01</div><p>AI governance is a four-layer problem: technical alignment, ethical frameworks, open source norms, and formal regulation — no single layer suffices.</p></div>
+<div class="takeaway"><div class="n">02</div><p>Machine ethics and AI alignment address different questions: ethics asks what AI should do, alignment asks how to make AI do what we actually want.</p></div>
+<div class="takeaway"><div class="n">03</div><p>Open source AI democratizes access and enables scrutiny but also accelerates misuse — the responsible release dilemma remains unresolved.</p></div>
+<div class="takeaway"><div class="n">04</div><p>The EU AI Act represents the first comprehensive risk-based regulation; other jurisdictions are taking sectoral (US), principles-based (UK), or vertical (China) approaches.</p></div>
+<div class="takeaway"><div class="n">05</div><p>The innovation–safety tension cannot be eliminated — adaptive governance that learns and evolves with the technology offers the most promising path forward.</p></div>
+</div>
+</div></section>
+
+<section id="glossary"><div class="wrap"><div class="sec-head"><div class="eyebrow">Reference</div><h2 class="sec-title display">Glossary</h2></div>
+<div class="glossary">
+<div><b>AI Alignment</b><span>The technical challenge of ensuring AI systems pursue goals matching human intentions, including unstated values and constraints.</span></div>
+<div><b>AI Safety</b><span>Research focused on preventing AI systems from causing harm — including unintended consequences, loss of control, and catastrophic risks.</span></div>
+<div><b>Brussels Effect</b><span>The phenomenon where EU regulations become de facto global standards due to the EU's large market size and regulatory capacity.</span></div>
+<div><b>Corrigibility</b><span>The property of an AI system allowing itself to be corrected or shut down by humans without resistance.</span></div>
+<div><b>EU AI Act</b><span>The European Union's comprehensive AI regulation (2024), classifying systems by risk level with proportionate obligations and enforcement.</span></div>
+<div><b>Interpretability</b><span>The ability to understand and explain why an AI system made a particular decision — crucial for accountability and trust.</span></div>
+<div><b>Machine Ethics</b><span>The study of designing AI systems that behave in ways consistent with human ethical norms and values.</span></div>
+<div><b>Regulatory Sandbox</b><span>A controlled environment where AI systems can be tested under regulatory supervision before full deployment, allowing policy to learn from real-world evidence.</span></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="wrap"><div class="sec-head"><div class="eyebrow">Navigation</div><h2 class="sec-title display">Continue learning.</h2></div>
+<div class="internal-nav">
+<a href="07-ethics-risks.html"><div class="dir">← Previous</div><strong>07 · Ethics &amp; Risks</strong><p class="muted">Bias, misuse, job displacement, and existential risk — what governance responds to</p></a>
+<a href="09-philosophy-future.html"><div class="dir">Next →</div><strong>09 · Philosophy &amp; Future of AI</strong><p class="muted">Consciousness, superintelligence, and the philosophical foundations of AI governance</p></a>
+</div>
+<div class="related" style="margin-top:28px">
+<a href="07-ethics-risks.html"><div class="tag">Ethics</div><div class="t">Ethics &amp; Risks</div><div class="d">What governance is responding to — bias, misuse, and existential risk</div></a>
+<a href="09-philosophy-future.html"><div class="tag">Philosophy</div><div class="t">Philosophy &amp; Future of AI</div><div class="d">Deep questions about consciousness, intelligence, and the long-term future</div></a>
+<a href="05-modern-systems.html"><div class="tag">Technical</div><div class="t">Modern AI Systems</div><div class="d">Foundation models, transformers, and the technical systems governance must address</div></a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-in"><div class="mono"><strong>08 · GOVERNANCE &amp; SOCIETY</strong><br>Knowledge Base · Note 08 of 09</div><div class="mono">Source: Wikipedia · September 2026</div></div></footer>
+</body></html>

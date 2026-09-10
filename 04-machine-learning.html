@@ -1,0 +1,415 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>04 · Machine Learning & Neural Networks</title>
+<meta name="description" content="Machine learning fundamentals, neural network architectures, deep learning, and how modern AI systems learn from data.">
+<style>:root{--paper:#f7f8fa;--panel:#eef1f5;--white:#fff;--ink:#172131;--ink2:#566579;--ink3:#8090a3;--line:#dce2e9;--deep:#0b1626;--deep2:#122238;--accent:#6c5ce7;--accent2:#9c8fff;--amber:#f0a32b;--teal:#10a5a0;--rose:#e05a6b;--maxw:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:auto;padding:0 28px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}.display{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+p{margin:0 0 14px}h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em}
+.muted{color:var(--ink2)}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(12px);border-bottom:1px solid #203552}
+.nav-in{max-width:var(--maxw);margin:auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cbd8e8}
+.brand b{color:var(--accent2)}.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;color:#9aacc1}.nav-links a:hover{color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+.hero{position:relative;overflow:hidden;background:var(--deep);color:#eaf1f8;padding:92px 0 78px;border-bottom:1px solid #16294a}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#1a2f4f26 1px,transparent 1px),linear-gradient(90deg,#1a2f4f26 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(120% 90% at 72% 0%,#000 30%,transparent 76%)}
+.hero-glow{position:absolute;width:680px;height:680px;right:-210px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.27),transparent 63%);filter:blur(8px)}
+.hero-in{position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:8px;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#0b1626;background:var(--amber);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.pill i{width:7px;height:7px;border-radius:50%;background:#0b1626}
+.hero h1{font-size:clamp(44px,7.5vw,80px);color:#fff;margin:0 0 20px;max-width:900px}.hero h1 span{color:var(--accent2)}
+.hero-sub{max-width:720px;color:#c2d2e4;font-size:clamp(17px,2.2vw,22px);line-height:1.48}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.meta{font:11.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#e2ecf6;border:1px solid #2a446f;padding:6px 12px;border-radius:999px}.meta.hot{border-color:var(--amber);color:var(--amber)}
+section{padding:74px 0}section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.dark{background:var(--deep2);color:#e6eef8}
+.sec-head{max-width:760px;margin-bottom:36px}.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.sec-title{font-size:clamp(28px,4.2vw,40px);line-height:1.08;margin:0;letter-spacing:-.025em}
+.sec-head p{font-size:17px;color:var(--ink2);margin:13px 0 0}.dark .sec-head p{color:#a9bdd4}.dark .eyebrow{color:var(--accent2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.toc,.card,.diagram,table{background:#fff;border:1px solid var(--line);border-radius:9px}
+.toc{padding:24px 26px}.toc-title,.card h4{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-top:0}
+.toc ol{margin:0;padding-left:22px}.toc li{padding:3px 0}.toc a{color:#3f50a9}
+.card{border-top:3px solid var(--accent);padding:24px}.card.amber{border-top-color:var(--amber)}.card.teal{border-top-color:var(--teal)}.card.rose{border-top-color:var(--rose)}.card.ink{border-top-color:var(--deep)}
+.card h3{margin:0 0 8px;font-size:20px}.card h4{margin:0 0 12px}.card p{margin:0 0 8px;color:var(--ink2);font-size:14.5px}
+.definition{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);background:#fff;border-radius:9px;overflow:hidden;margin:20px 0}
+.definition .term{padding:18px;background:var(--deep);color:#fff;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:flex;align-items:center}
+.definition .meaning{padding:18px 20px;color:var(--ink2)}
+@media(max-width:600px){.definition{grid-template-columns:1fr}.definition .term{display:block}}
+.callout{border:1px solid #d9d3ff;background:#f1efff;border-left:4px solid var(--accent);border-radius:8px;padding:20px 22px;margin:24px 0}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#4f4b73}
+.callout.warning{border-color:#f1d8a9;background:#fff7e8;border-left-color:var(--amber)}.callout.warning p{color:#72551f}
+.callout.teal{border-color:#c9ecea;background:#e6f7f6;border-left-color:var(--teal)}.callout.teal p{color:#086d69}
+.callout.rose{border-color:#f5c9ce;background:#fdeef0;border-left-color:var(--rose)}.callout.rose p{color:#8c2c3a}
+.diagram{padding:24px;margin:24px 0}.diagram svg{width:100%;height:auto}
+.diagram-caption{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.flow-box{border:1px solid var(--line);border-radius:8px;padding:17px 12px;text-align:center;background:var(--paper)}
+.flow-box b{display:block;font-size:14px}.flow-box span{display:block;color:var(--ink3);font-size:11px;margin-top:3px}
+.flow-arrow{text-align:center;font-size:20px;color:var(--accent)}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+th{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:12px 15px;background:var(--deep);color:#c7d6e8}
+td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaway{border:1px solid #294261;background:#ffffff08;border-radius:9px;padding:20px}
+.takeaway .n{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.takeaway p{margin:0;color:#c7d6e8;font-size:14px}
+@media(max-width:760px){.takeaways{grid-template-columns:1fr}}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.glossary div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px}
+.glossary b{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:block;margin-bottom:4px}
+.glossary span{display:block;color:var(--ink2);font-size:13.5px;margin-top:3px}
+@media(max-width:700px){.glossary{grid-template-columns:1fr}}
+.internal-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.internal-nav a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink);transition:all .2s}
+.internal-nav a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.internal-nav .dir{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+footer{background:var(--deep);color:#8fa6c0;border-top:1px solid #203552;padding:34px 0}
+.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}footer strong{color:#dce8f5}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink)}
+.related a:hover{border-color:var(--accent)}
+.related .tag{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.related .t{font-size:15px;font-weight:600;margin:6px 0 4px}
+.related .d{font-size:13px;color:var(--ink2)}
+@media(max-width:820px){.related{grid-template-columns:1fr}}
+.kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;padding:2px 6px;background:#eef1f5;border:1px solid var(--line);border-radius:4px}
+ul.clean{padding-left:18px;margin:0}ul.clean li{margin-bottom:6px}
+@media print{nav{display:none}.hero{padding:45px 0}section{padding:38px 0}.card,.toc,table,.diagram{break-inside:avoid}}
+</style></head><body>
+<nav><div class="nav-in"><a class="brand" href="index.html">KNOWLEDGE <b>BASE</b> / AI</a><div class="nav-links"><a href="index.html">Home</a><a href="#fundamentals">Fundamentals</a><a href="#types">Types</a><a href="#neural">Neural Nets</a><a href="#deep">Deep Learning</a><a href="#glossary">Glossary</a><a href="05-modern-systems.html">Next →</a></div></div></nav>
+
+<header class="hero" id="top"><div class="hero-grid"></div><div class="hero-glow"></div><div class="wrap hero-in">
+<div class="pill"><i></i> Note 04 of 09</div>
+<div class="eyebrow">Learning</div>
+<h1 class="display">Machine Learning &amp; <span>Neural Networks</span></h1>
+<p class="hero-sub">How machines learn from data instead of following hand-coded rules — from simple linear models to deep networks with billions of parameters that power modern AI.</p>
+<div class="meta-row"><span class="meta hot">CORE CONCEPT</span><span class="meta">READING · 18–24 MIN</span><span class="meta">PREREQUISITE · NOTES 01–03</span><span class="meta">KNOWLEDGE BASE · 04 / 09</span></div>
+</div></header>
+
+<main>
+<section id="overview"><div class="wrap"><div class="sec-head"><div class="eyebrow">Start here</div><h2 class="sec-title display">The paradigm shift from programming to learning.</h2><p>Traditional software is explicitly programmed: a human writes rules, and the machine follows them. Machine learning inverts this — the machine discovers its own rules from data. This shift is the engine behind nearly every modern AI breakthrough, from image recognition to language models.</p></div>
+
+<div class="grid2">
+<div class="toc"><div class="toc-title">On this page</div><ol>
+<li><a href="#fundamentals">Machine learning fundamentals</a></li>
+<li><a href="#pipeline">The ML pipeline</a></li>
+<li><a href="#types">Three types of learning</a></li>
+<li><a href="#neural">Artificial neural networks</a></li>
+<li><a href="#deep">Deep learning</a></li>
+<li><a href="#transformers">Transformers and GPT</a></li>
+<li><a href="#training">Training, inference, and optimization</a></li>
+<li><a href="#takeaways">Key takeaways</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ol></div>
+<div class="card amber"><h4>Learning objectives</h4><p>By the end of this note, you should be able to:</p>
+<ul class="clean"><li>Explain how machine learning differs from traditional programming</li>
+<li>Distinguish supervised, unsupervised, and reinforcement learning</li>
+<li>Describe neural network architecture: layers, nodes, activation functions</li>
+<li>Explain how deep learning builds hierarchical representations</li>
+<li>Understand the training→inference lifecycle and why optimization matters</li>
+<li>Articulate what makes transformers and GPT models architecturally distinct</li></ul>
+</div>
+</div>
+</div></section>
+
+<section class="alt" id="fundamentals"><div class="wrap"><div class="sec-head"><div class="eyebrow">01 — Fundamentals</div><h2 class="sec-title display">Learning from data, not from instructions.</h2></div>
+
+<div class="definition"><div class="term">Machine Learning</div><div class="meaning">A subset of artificial intelligence in which systems improve their performance on a task through experience with data, without being explicitly programmed with rules for that task.</div></div>
+
+<h3 style="margin-top:32px;margin-bottom:12px">Intuition: teaching by example</h3>
+<p>Imagine teaching a child to recognize cats. You don't describe whisker lengths, ear shapes, and fur patterns in precise measurements. You show them many cats and say "this is a cat" — eventually, they learn. Machine learning works similarly: instead of coding rules, you feed a system thousands of labeled examples, and it discovers the patterns that distinguish cats from dogs.</p>
+
+<h3 style="margin-top:24px;margin-bottom:12px">Technical: the learning problem</h3>
+<p>Formally, machine learning seeks a function <em>f</em> that maps inputs <em>X</em> to outputs <em>Y</em>, such that <em>f</em> generalizes well to unseen data. The system is given a <strong>training set</strong> of input-output pairs, a <strong>loss function</strong> that measures prediction error, and an <strong>optimization algorithm</strong> that adjusts internal parameters to minimize that loss.</p>
+
+<div class="callout"><strong>Why this matters</strong><p>Machine learning shifted AI from brittle, hand-crafted rule systems (→ <a href="03-traditional-techniques.html">Note 03: Traditional Techniques</a>) to adaptive systems that improve automatically. This is why modern AI can handle tasks too complex for humans to specify rules for — like understanding natural language or recognizing faces in varied conditions.</p></div>
+
+<div class="grid3">
+<div class="card"><h4>Data</h4><p>The raw material. More data generally means better models, provided the data is relevant, diverse, and properly labeled.</p></div>
+<div class="card teal"><h4>Model</h4><p>The mathematical structure that learns patterns — from simple linear regressions to neural networks with billions of parameters.</p></div>
+<div class="card rose"><h4>Loss Function</h4><p>A measure of how wrong the model's predictions are. Training minimizes this function across the training data.</p></div>
+</div>
+</div></section>
+
+<section id="pipeline"><div class="wrap"><div class="sec-head"><div class="eyebrow">02 — Pipeline</div><h2 class="sec-title display">From raw data to predictions.</h2><p>Every machine learning system follows a common pipeline: collect data, prepare it, train a model, evaluate its performance, and deploy it for inference on new data.</p></div>
+
+<div class="flow">
+<div class="flow-box"><b>Data</b><span>Collect, clean, label</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Training</b><span>Fit model to data</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Model</b><span>Learned parameters</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Inference</b><span>Predict on new data</span></div>
+<div class="flow-arrow">→</div>
+<div class="flow-box"><b>Output</b><span>Decisions, predictions</span></div>
+</div>
+
+<div class="callout teal" style="margin-top:24px"><strong>Training vs. inference</strong><p><strong>Training</strong> is the expensive, one-time process of learning from data — it can take days or weeks on powerful GPUs. <strong>Inference</strong> is the fast, repeated process of using the trained model to make predictions on new inputs. This distinction is fundamental to understanding AI system costs and capabilities.</p></div>
+</div></section>
+
+<section class="alt" id="types"><div class="wrap"><div class="sec-head"><div class="eyebrow">03 — Types of Learning</div><h2 class="sec-title display">Three paradigms for learning from experience.</h2><p>Machine learning systems are categorized by the type of feedback signal they receive during training. Each paradigm suits different kinds of problems and available data.</p></div>
+
+<table><thead><tr><th>Paradigm</th><th>Training Signal</th><th>Goal</th><th>Example Tasks</th></tr></thead><tbody>
+<tr><td>Supervised Learning</td><td>Labeled input-output pairs</td><td>Learn mapping from inputs to known outputs</td><td>Image classification, spam detection, translation</td></tr>
+<tr><td>Unsupervised Learning</td><td>Unlabeled data only</td><td>Discover hidden structure and patterns</td><td>Clustering, dimensionality reduction, anomaly detection</td></tr>
+<tr><td>Reinforcement Learning</td><td>Reward/penalty signals from environment</td><td>Learn optimal sequence of actions (policy)</td><td>Game playing, robotics, autonomous driving</td></tr>
+</tbody></table>
+
+<div class="grid3" style="margin-top:24px">
+<div class="card amber"><h3>Supervised Learning</h3><p><strong>Intuition:</strong> A teacher provides the correct answer for each example.</p>
+<p><strong>Technical:</strong> Given a dataset of (x, y) pairs, learn a function f(x) → y that generalizes to new x values. Common algorithms: linear regression, decision trees, support vector machines, neural networks.</p>
+<p><strong>Example:</strong> Email spam detection — trained on thousands of emails labeled "spam" or "not spam," the model learns which features (keywords, sender patterns) predict spam.</p></div>
+<div class="card teal"><h3>Unsupervised Learning</h3><p><strong>Intuition:</strong> Finding patterns in data with no answer key.</p>
+<p><strong>Technical:</strong> Given unlabeled data X, discover latent structure — clusters, distributions, or compressed representations. Common algorithms: k-means clustering, PCA, autoencoders, GANs.</p>
+<p><strong>Example:</strong> Customer segmentation — grouping shoppers by purchasing behavior without predefined categories, revealing natural market segments.</p></div>
+<div class="card rose"><h3>Reinforcement Learning</h3><p><strong>Intuition:</strong> Learning by trial and error with rewards and penalties.</p>
+<p><strong>Technical:</strong> An agent interacts with an environment, taking actions and receiving rewards. It learns a <em>policy</em> — a strategy mapping states to actions — that maximizes cumulative reward. Key algorithms: Q-learning, policy gradients, PPO.</p>
+<p><strong>Example:</strong> AlphaGo learned to play Go by playing millions of games against itself, receiving +1 for wins and −1 for losses (→ <a href="02-goals.html">Note 02: Goals</a>).</p></div>
+</div>
+
+<div class="callout warning" style="margin-top:24px"><strong>The data dependency</strong><p>Supervised learning requires large labeled datasets, which are expensive to create. This bottleneck drove the rise of <strong>self-supervised learning</strong> (a form of unsupervised learning) — where models create their own training signal from unlabeled data. This is how GPT and other large language models are trained: by predicting the next word in text, requiring no human labels.</p></div>
+</div></section>
+
+<section id="neural"><div class="wrap"><div class="sec-head"><div class="eyebrow">04 — Neural Networks</div><h2 class="sec-title display">The architecture that powers modern AI.</h2><p>Artificial neural networks are computing systems loosely inspired by biological neural networks. They consist of interconnected nodes (neurons) organized in layers, where each connection has an adjustable weight that is tuned during training.</p></div>
+
+<div class="definition"><div class="term">Neural Network</div><div class="meaning">A computational model composed of layers of interconnected nodes, where each node applies a weighted sum of its inputs followed by a nonlinear activation function to produce an output signal.</div></div>
+
+<div class="diagram">
+<svg viewBox="0 0 800 420" role="img" aria-label="Neural network architecture with input, hidden, and output layers">
+<!-- Background -->
+<rect width="800" height="420" fill="#f7f8fa" rx="8"/>
+
+<!-- Layer labels -->
+<text x="110" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#172131" font-family="ui-monospace,monospace">INPUT LAYER</text>
+<text x="400" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#172131" font-family="ui-monospace,monospace">HIDDEN LAYERS</text>
+<text x="690" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#172131" font-family="ui-monospace,monospace">OUTPUT LAYER</text>
+
+<!-- Connections: Input to Hidden 1 -->
+<g stroke="#6c5ce7" stroke-width="0.6" opacity="0.3">
+<!-- Input node 1 to all hidden1 -->
+<line x1="110" y1="100" x2="310" y2="80"/><line x1="110" y1="100" x2="310" y2="160"/><line x1="110" y1="100" x2="310" y2="240"/><line x1="110" y1="100" x2="310" y2="320"/>
+<line x1="110" y1="180" x2="310" y2="80"/><line x1="110" y1="180" x2="310" y2="160"/><line x1="110" y1="180" x2="310" y2="240"/><line x1="110" y1="180" x2="310" y2="320"/>
+<line x1="110" y1="260" x2="310" y2="80"/><line x1="110" y1="260" x2="310" y2="160"/><line x1="110" y1="260" x2="310" y2="240"/><line x1="110" y1="260" x2="310" y2="320"/>
+<line x1="110" y1="340" x2="310" y2="80"/><line x1="110" y1="340" x2="310" y2="160"/><line x1="110" y1="340" x2="310" y2="240"/><line x1="110" y1="340" x2="310" y2="320"/>
+</g>
+
+<!-- Connections: Hidden 1 to Hidden 2 -->
+<g stroke="#10a5a0" stroke-width="0.6" opacity="0.3">
+<line x1="310" y1="80" x2="490" y2="120"/><line x1="310" y1="80" x2="490" y2="200"/><line x1="310" y1="80" x2="490" y2="280"/>
+<line x1="310" y1="160" x2="490" y2="120"/><line x1="310" y1="160" x2="490" y2="200"/><line x1="310" y1="160" x2="490" y2="280"/>
+<line x1="310" y1="240" x2="490" y2="120"/><line x1="310" y1="240" x2="490" y2="200"/><line x1="310" y1="240" x2="490" y2="280"/>
+<line x1="310" y1="320" x2="490" y2="120"/><line x1="310" y1="320" x2="490" y2="200"/><line x1="310" y1="320" x2="490" y2="280"/>
+</g>
+
+<!-- Connections: Hidden 2 to Output -->
+<g stroke="#e05a6b" stroke-width="0.6" opacity="0.3">
+<line x1="490" y1="120" x2="690" y2="160"/><line x1="490" y1="120" x2="690" y2="260"/>
+<line x1="490" y1="200" x2="690" y2="160"/><line x1="490" y1="200" x2="690" y2="260"/>
+<line x1="490" y1="280" x2="690" y2="160"/><line x1="490" y1="280" x2="690" y2="260"/>
+</g>
+
+<!-- Input layer nodes -->
+<circle cx="110" cy="100" r="18" fill="#6c5ce7" opacity="0.9"/><text x="110" y="105" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">x₁</text>
+<circle cx="110" cy="180" r="18" fill="#6c5ce7" opacity="0.9"/><text x="110" y="185" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">x₂</text>
+<circle cx="110" cy="260" r="18" fill="#6c5ce7" opacity="0.9"/><text x="110" y="265" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">x₃</text>
+<circle cx="110" cy="340" r="18" fill="#6c5ce7" opacity="0.9"/><text x="110" y="345" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">x₄</text>
+
+<!-- Hidden layer 1 nodes -->
+<circle cx="310" cy="80" r="18" fill="#9c8fff" opacity="0.9"/><text x="310" y="85" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₁</text>
+<circle cx="310" cy="160" r="18" fill="#9c8fff" opacity="0.9"/><text x="310" y="165" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₂</text>
+<circle cx="310" cy="240" r="18" fill="#9c8fff" opacity="0.9"/><text x="310" y="245" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₃</text>
+<circle cx="310" cy="320" r="18" fill="#9c8fff" opacity="0.9"/><text x="310" y="325" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₄</text>
+
+<!-- Hidden layer 2 nodes -->
+<circle cx="490" cy="120" r="18" fill="#10a5a0" opacity="0.9"/><text x="490" y="125" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₅</text>
+<circle cx="490" cy="200" r="18" fill="#10a5a0" opacity="0.9"/><text x="490" y="205" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₆</text>
+<circle cx="490" cy="280" r="18" fill="#10a5a0" opacity="0.9"/><text x="490" y="285" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">h₇</text>
+
+<!-- Output layer nodes -->
+<circle cx="690" cy="160" r="20" fill="#e05a6b" opacity="0.9"/><text x="690" y="165" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">y₁</text>
+<circle cx="690" cy="260" r="20" fill="#e05a6b" opacity="0.9"/><text x="690" y="265" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">y₂</text>
+
+<!-- Input labels -->
+<text x="30" y="105" font-size="10" fill="#566579" font-family="ui-monospace,monospace">pixel</text>
+<text x="30" y="185" font-size="10" fill="#566579" font-family="ui-monospace,monospace">pixel</text>
+<text x="30" y="265" font-size="10" fill="#566579" font-family="ui-monospace,monospace">pixel</text>
+<text x="30" y="345" font-size="10" fill="#566579" font-family="ui-monospace,monospace">pixel</text>
+
+<!-- Output labels -->
+<text x="730" y="165" font-size="10" fill="#566579" font-family="ui-monospace,monospace">cat: 0.92</text>
+<text x="730" y="265" font-size="10" fill="#566579" font-family="ui-monospace,monospace">dog: 0.08</text>
+
+<!-- Neuron detail callout -->
+<rect x="530" y="350" width="250" height="60" rx="6" fill="#fff" stroke="#dce2e9"/>
+<text x="545" y="370" font-size="10" font-weight="600" fill="#172131" font-family="ui-monospace,monospace">EACH NEURON COMPUTES:</text>
+<text x="545" y="390" font-size="11" fill="#566579" font-family="ui-monospace,monospace">output = σ(w₁x₁ + w₂x₂ + ... + b)</text>
+<text x="545" y="404" font-size="9" fill="#8090a3">σ = activation function, w = weights, b = bias</text>
+</svg>
+<div class="diagram-caption">Figure 01 · Feedforward neural network: input layer → hidden layers → output layer</div>
+</div>
+
+<h3 style="margin-top:32px;margin-bottom:12px">Architecture components</h3>
+
+<div class="grid2">
+<div class="card"><h3>Layers</h3><p><strong>Input layer:</strong> receives raw data (pixels, words, sensor readings). Each node represents one feature of the input.</p>
+<p><strong>Hidden layers:</strong> perform computations. Each layer transforms the data, extracting increasingly abstract features. More hidden layers = "deeper" network.</p>
+<p><strong>Output layer:</strong> produces the final prediction (classification probabilities, regression values, generated text).</p></div>
+<div class="card teal"><h3>Activation Functions</h3><p>Non-linear functions applied at each neuron, enabling networks to learn complex patterns. Without them, any number of layers would collapse to a single linear transformation.</p>
+<p><strong>ReLU</strong> (Rectified Linear Unit): f(x) = max(0, x) — the most common choice, simple and effective.</p>
+<p><strong>Sigmoid:</strong> f(x) = 1/(1+e⁻ˣ) — squashes output to [0,1], used in output layers for binary classification.</p>
+<p><strong>Softmax:</strong> converts raw scores to probability distributions across classes.</p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>Weights and biases</strong><p>Each connection between neurons has a <strong>weight</strong> (how much influence one neuron has on another) and each neuron has a <strong>bias</strong> (a baseline activation level). Training adjusts these millions or billions of parameters to minimize prediction error. A network with 1 billion parameters has 1 billion numbers to tune — this is why training requires enormous computation.</p></div>
+</div></section>
+
+<section class="alt" id="deep"><div class="wrap"><div class="sec-head"><div class="eyebrow">05 — Deep Learning</div><h2 class="sec-title display">Layers that build understanding.</h2><p>Deep learning uses neural networks with many hidden layers — sometimes hundreds. Each layer learns to represent the data at a different level of abstraction, building a hierarchy from simple features to complex concepts.</p></div>
+
+<div class="definition"><div class="term">Deep Learning</div><div class="meaning">A subset of machine learning that uses multi-layer neural networks to learn hierarchical representations of data, enabling automatic feature extraction and pattern recognition at multiple levels of abstraction.</div></div>
+
+<div class="diagram">
+<svg viewBox="0 0 800 360" role="img" aria-label="Deep learning hierarchy: from raw pixels to abstract concepts">
+<rect width="800" height="360" fill="#f7f8fa" rx="8"/>
+
+<!-- Level 1: Raw input -->
+<rect x="40" y="280" width="140" height="60" rx="8" fill="#6c5ce7" opacity="0.15" stroke="#6c5ce7" stroke-width="1.5"/>
+<text x="110" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#6c5ce7">Layer 1</text>
+<text x="110" y="324" text-anchor="middle" font-size="10" fill="#566579">Raw pixels</text>
+
+<!-- Arrow -->
+<text x="200" y="306" font-size="22" fill="#6c5ce7">→</text>
+
+<!-- Level 2: Edges -->
+<rect x="220" y="230" width="140" height="60" rx="8" fill="#9c8fff" opacity="0.2" stroke="#9c8fff" stroke-width="1.5"/>
+<text x="290" y="256" text-anchor="middle" font-size="12" font-weight="700" fill="#6c5ce7">Layers 2–3</text>
+<text x="290" y="274" text-anchor="middle" font-size="10" fill="#566579">Edges &amp; textures</text>
+
+<!-- Arrow -->
+<text x="380" y="256" font-size="22" fill="#6c5ce7">→</text>
+
+<!-- Level 3: Parts -->
+<rect x="400" y="170" width="140" height="60" rx="8" fill="#10a5a0" opacity="0.2" stroke="#10a5a0" stroke-width="1.5"/>
+<text x="470" y="196" text-anchor="middle" font-size="12" font-weight="700" fill="#10a5a0">Layers 4–8</text>
+<text x="470" y="214" text-anchor="middle" font-size="10" fill="#566579">Parts (eyes, ears)</text>
+
+<!-- Arrow -->
+<text x="560" y="196" font-size="22" fill="#10a5a0">→</text>
+
+<!-- Level 4: Objects -->
+<rect x="580" y="100" width="170" height="60" rx="8" fill="#f0a32b" opacity="0.2" stroke="#f0a32b" stroke-width="1.5"/>
+<text x="665" y="126" text-anchor="middle" font-size="12" font-weight="700" fill="#f0a32b">Layers 9–16</text>
+<text x="665" y="144" text-anchor="middle" font-size="10" fill="#566579">Objects (cat, dog)</text>
+
+<!-- Arrow -->
+<text x="665" y="82" font-size="22" fill="#e05a6b" text-anchor="middle">↑</text>
+
+<!-- Level 5: Concepts -->
+<rect x="580" y="25" width="170" height="50" rx="8" fill="#e05a6b" opacity="0.15" stroke="#e05a6b" stroke-width="1.5"/>
+<text x="665" y="46" text-anchor="middle" font-size="12" font-weight="700" fill="#e05a6b">Layers 17+</text>
+<text x="665" y="64" text-anchor="middle" font-size="10" fill="#566579">Semantic concepts</text>
+
+<!-- Annotation -->
+<text x="40" y="25" font-size="11" font-weight="600" fill="#172131" font-family="ui-monospace,monospace">ABSTRACTION INCREASES →</text>
+<text x="40" y="42" font-size="10" fill="#8090a3">Each layer combines features from the layer below</text>
+<text x="40" y="56" font-size="10" fill="#8090a3">to form more complex, higher-level representations.</text>
+
+<!-- Connecting visual: ascending line -->
+<line x1="110" y1="280" x2="665" y2="75" stroke="#6c5ce7" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+</svg>
+<div class="diagram-caption">Figure 02 · Hierarchical feature learning: each layer builds on the previous one</div>
+</div>
+
+<h3 style="margin-top:32px;margin-bottom:12px">Key architectures</h3>
+
+<div class="grid2">
+<div class="card amber"><h3>Convolutional Neural Networks (CNNs)</h3><p><strong>Intuition:</strong> Sliding a filter across an image to detect local patterns like edges, then combining those into larger structures.</p>
+<p><strong>Technical:</strong> Use convolutional layers with learnable filters that detect spatial features. Pooling layers reduce dimensionality. Shared weights make them parameter-efficient for image data.</p>
+<p><strong>Example:</strong> ImageNet-winning models like AlexNet, ResNet. Used in medical imaging, autonomous driving, facial recognition.</p></div>
+<div class="card teal"><h3>Recurrent Neural Networks (RNNs)</h3><p><strong>Intuition:</strong> Processing sequences one element at a time, maintaining a "memory" of what came before.</p>
+<p><strong>Technical:</strong> Each step takes the current input and the previous hidden state, producing a new hidden state. Variants like LSTM and GRU address the vanishing gradient problem for long sequences.</p>
+<p><strong>Example:</strong> Language modeling, time series prediction, speech recognition. Largely replaced by transformers for NLP tasks since 2017.</p></div>
+</div>
+
+<div class="callout teal" style="margin-top:24px"><strong>Representation learning</strong><p>The core insight of deep learning: instead of hand-engineering features (→ <a href="03-traditional-techniques.html">Note 03: Traditional Techniques</a>), let the network <em>learn</em> the best features automatically. A CNN trained on images learns edge detectors in early layers and object-part detectors in later layers — no human specified what "edges" or "parts" should look like.</p></div>
+</div></section>
+
+<section id="transformers"><div class="wrap"><div class="sec-head"><div class="eyebrow">06 — Transformers &amp; GPT</div><h2 class="sec-title display">The architecture behind modern language AI.</h2><p>Generative Pre-trained Transformers (GPT) represent the dominant architecture in modern AI. Built on the transformer architecture introduced in 2017, these models process language by attending to all parts of the input simultaneously — rather than reading sequentially like RNNs.</p></div>
+
+<div class="definition"><div class="term">Transformer</div><div class="meaning">A neural network architecture that uses self-attention mechanisms to weigh the importance of different parts of the input when producing each output element. Enables parallel processing and captures long-range dependencies in sequences.</div></div>
+
+<div class="grid2">
+<div class="card"><h3>Self-Attention</h3><p>The key innovation. For each word in a sentence, the model computes how much it should "attend to" every other word. In "The cat sat on the mat because <em>it</em> was tired," attention links "it" to "cat" — resolving ambiguity that sequential models struggled with.</p>
+<p>Mathematically: Attention(Q,K,V) = softmax(QK<sup>T</sup>/√d)V — queries, keys, and values derived from the input, scaled by dimension.</p></div>
+<div class="card rose"><h3>Generative Pre-training</h3><p><strong>Pre-training:</strong> Train on massive text corpora with a simple objective — predict the next token. No labels needed. The model learns grammar, facts, reasoning patterns, and world knowledge implicitly.</p>
+<p><strong>Fine-tuning:</strong> Adapt the pre-trained model to specific tasks (summarization, coding, conversation) with small amounts of task-specific data or via instruction tuning (RLHF).</p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>Scale is the key variable</strong><p>GPT-2 (2019) had 1.5 billion parameters. GPT-3 (2020) had 175 billion. GPT-4 (2023) is estimated at over a trillion. As models scale, they exhibit <strong>emergent capabilities</strong> — abilities not present in smaller versions, like chain-of-thought reasoning, code generation, and few-shot learning. This scaling behavior is one of the most important phenomena in modern AI research. → <a href="05-modern-systems.html">Note 05: Modern AI Systems</a></p></div>
+</div></section>
+
+<section class="alt" id="training"><div class="wrap"><div class="sec-head"><div class="eyebrow">07 — Training &amp; Optimization</div><h2 class="sec-title display">How networks actually learn.</h2><p>Training a neural network is an optimization problem: find the set of weights and biases that minimizes the loss function across the training data. This is done iteratively through forward passes, loss computation, and backward propagation of errors.</p></div>
+
+<div class="grid2">
+<div class="card ink"><h3>Forward Pass</h3><p>Input data flows through the network layer by layer. Each neuron computes a weighted sum of inputs plus bias, applies an activation function, and passes the result forward. The output layer produces a prediction.</p></div>
+<div class="card amber"><h3>Backpropagation</h3><p>The core algorithm. After the forward pass, the loss function measures prediction error. Backpropagation computes the gradient of the loss with respect to every weight — using the chain rule of calculus — propagating error signals backward through the network.</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card teal"><h3>Gradient Descent</h3><p>The optimization algorithm. Each weight is adjusted by a small step in the direction that reduces loss. The step size is controlled by the <strong>learning rate</strong>. Variants like Adam, SGD with momentum, and AdaGrad improve convergence speed and stability.</p></div>
+<div class="card rose"><h3>Overfitting &amp; Regularization</h3><p>A model that memorizes training data but fails on new data is <strong>overfitting</strong>. Regularization techniques — dropout, weight decay, early stopping, data augmentation — prevent this by constraining the model's capacity to memorize noise.</p></div>
+</div>
+
+<div class="callout warning" style="margin-top:24px"><strong>The computational cost</strong><p>Training GPT-4 is estimated to have cost over $100 million in compute alone, using tens of thousands of GPUs for months. This has concentrated AI development in well-funded organizations and raised questions about the sustainability of the current scaling approach.</p></div>
+
+<h3 style="margin-top:32px;margin-bottom:12px">Inference: using the trained model</h3>
+<p>Once trained, the model is deployed for <strong>inference</strong> — making predictions on new, unseen data. Inference is computationally cheaper than training (no gradients needed), but still requires significant resources for large models. Techniques like quantization, pruning, and distillation reduce model size for efficient deployment on edge devices.</p>
+</div></section>
+
+<section class="dark" id="takeaways"><div class="wrap"><div class="sec-head center"><div class="eyebrow">End of note</div><h2 class="sec-title display">Remember these ideas.</h2></div>
+<div class="takeaways">
+<div class="takeaway"><div class="n">01</div><p>Machine learning learns patterns from data instead of following hand-coded rules — a paradigm shift that enables AI to handle tasks too complex for explicit programming.</p></div>
+<div class="takeaway"><div class="n">02</div><p>Three learning paradigms: supervised (labeled examples), unsupervised (finding hidden structure), and reinforcement (trial-and-error with rewards).</p></div>
+<div class="takeaway"><div class="n">03</div><p>Neural networks are layers of connected neurons — each computing weighted sums plus nonlinear activations. Weights are adjusted during training via backpropagation.</p></div>
+<div class="takeaway"><div class="n">04</div><p>Deep learning adds many layers, each learning features at a higher level of abstraction — from pixels to edges to parts to objects to concepts.</p></div>
+<div class="takeaway"><div class="n">05</div><p>Transformers replaced RNNs by using self-attention to process sequences in parallel. GPT models scale this architecture to billions of parameters with emergent capabilities.</p></div>
+<div class="takeaway"><div class="n">06</div><p>The training-inference distinction is fundamental: training is expensive and one-time; inference is fast and repeated. Optimization (backprop + gradient descent) is how networks learn.</p></div>
+</div>
+</div></section>
+
+<section id="glossary"><div class="wrap"><div class="sec-head"><div class="eyebrow">Reference</div><h2 class="sec-title display">Glossary</h2></div>
+<div class="glossary">
+<div><b>Machine Learning</b><span>Systems that improve performance on tasks through experience with data, without explicit programming.</span></div>
+<div><b>Neural Network</b><span>A computational model of interconnected layered nodes inspired by biological brains.</span></div>
+<div><b>Deep Learning</b><span>Machine learning using multi-layer neural networks to learn hierarchical representations.</span></div>
+<div><b>Backpropagation</b><span>Algorithm that computes gradients of the loss function with respect to all weights, enabling training via gradient descent.</span></div>
+<div><b>Activation Function</b><span>A nonlinear function (ReLU, sigmoid, softmax) applied at each neuron, enabling networks to learn complex patterns.</span></div>
+<div><b>Loss Function</b><span>A mathematical measure of how far predictions are from true values — the objective training seeks to minimize.</span></div>
+<div><b>Gradient Descent</b><span>Optimization algorithm that iteratively adjusts parameters in the direction that reduces the loss function.</span></div>
+<div><b>Overfitting</b><span>When a model memorizes training data noise instead of learning generalizable patterns, causing poor performance on new data.</span></div>
+<div><b>Transformer</b><span>A neural network architecture using self-attention mechanisms to process sequences in parallel, powering modern language models.</span></div>
+<div><b>GPT</b><span>Generative Pre-trained Transformer — large language models trained to predict the next token in a sequence.</span></div>
+<div><b>Inference</b><span>Using a trained model to make predictions on new, unseen data — distinct from the training phase.</span></div>
+<div><b>CNN</b><span>Convolutional Neural Network — uses learnable filters to detect spatial patterns, dominant in computer vision.</span></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="wrap"><div class="sec-head"><div class="eyebrow">Navigation</div><h2 class="sec-title display">Continue learning.</h2></div>
+<div class="internal-nav">
+<a href="03-traditional-techniques.html"><div class="dir">← Previous</div><strong>03 · Traditional AI Techniques</strong><p class="muted">Search, logic, probability, and classification methods that preceded machine learning</p></a>
+<a href="05-modern-systems.html"><div class="dir">Next →</div><strong>05 · Modern AI Systems</strong><p class="muted">How GPT, foundation models, and AI agents work in practice today</p></a>
+</div>
+<div class="related" style="margin-top:28px">
+<a href="03-traditional-techniques.html"><div class="tag">Techniques</div><div class="t">Traditional AI Techniques</div><div class="d">Rule-based systems, search algorithms, and probabilistic reasoning</div></a>
+<a href="05-modern-systems.html"><div class="tag">Systems</div><div class="t">Modern AI Systems</div><div class="d">Foundation models, AI agents, and real-world applications</div></a>
+<a href="06-applications.html"><div class="tag">Capabilities</div><div class="t">AI Capabilities &amp; Applications</div><div class="d">What AI can do: vision, language, creativity, and decision-making</div></a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-in"><div class="mono"><strong>04 · MACHINE LEARNING &amp; NEURAL NETWORKS</strong><br>Knowledge Base · Note 04 of 09</div><div class="mono">Source: Wikipedia · September 2026</div></div></footer>
+</body></html>

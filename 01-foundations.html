@@ -1,0 +1,289 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 · Foundations of Artificial Intelligence</title>
+<meta name="description" content="What AI is, how the field evolved from 1956 to present, and why it matters now.">
+<style>:root{--paper:#f7f8fa;--panel:#eef1f5;--white:#fff;--ink:#172131;--ink2:#566579;--ink3:#8090a3;--line:#dce2e9;--deep:#0b1626;--deep2:#122238;--accent:#6c5ce7;--accent2:#9c8fff;--amber:#f0a32b;--teal:#10a5a0;--rose:#e05a6b;--maxw:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:auto;padding:0 28px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}.display{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+p{margin:0 0 14px}h1,h2,h3,h4{line-height:1.15;letter-spacing:-.02em}
+.muted{color:var(--ink2)}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(12px);border-bottom:1px solid #203552}
+.nav-in{max-width:var(--maxw);margin:auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#cbd8e8}
+.brand b{color:var(--accent2)}.nav-links{display:flex;gap:22px}.nav-links a{font-size:13px;color:#9aacc1}.nav-links a:hover{color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+.hero{position:relative;overflow:hidden;background:var(--deep);color:#eaf1f8;padding:92px 0 78px;border-bottom:1px solid #16294a}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#1a2f4f26 1px,transparent 1px),linear-gradient(90deg,#1a2f4f26 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(120% 90% at 72% 0%,#000 30%,transparent 76%)}
+.hero-glow{position:absolute;width:680px;height:680px;right:-210px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.27),transparent 63%);filter:blur(8px)}
+.hero-in{position:relative;z-index:1}.pill{display:inline-flex;align-items:center;gap:8px;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#0b1626;background:var(--amber);padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.pill i{width:7px;height:7px;border-radius:50%;background:#0b1626}
+.hero h1{font-size:clamp(44px,7.5vw,80px);color:#fff;margin:0 0 20px;max-width:900px}.hero h1 span{color:var(--accent2)}
+.hero-sub{max-width:720px;color:#c2d2e4;font-size:clamp(17px,2.2vw,22px);line-height:1.48}
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.meta{font:11.5px ui-monospace,SFMono-Regular,Consolas,monospace;color:#e2ecf6;border:1px solid #2a446f;padding:6px 12px;border-radius:999px}.meta.hot{border-color:var(--amber);color:var(--amber)}
+section{padding:74px 0}section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+section.dark{background:var(--deep2);color:#e6eef8}
+.sec-head{max-width:760px;margin-bottom:36px}.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.sec-title{font-size:clamp(28px,4.2vw,40px);line-height:1.08;margin:0;letter-spacing:-.025em}
+.sec-head p{font-size:17px;color:var(--ink2);margin:13px 0 0}.dark .sec-head p{color:#a9bdd4}.dark .eyebrow{color:var(--accent2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.toc,.card,.diagram,table{background:#fff;border:1px solid var(--line);border-radius:9px}
+.toc{padding:24px 26px}.toc-title,.card h4{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-top:0}
+.toc ol{margin:0;padding-left:22px}.toc li{padding:3px 0}.toc a{color:#3f50a9}
+.card{border-top:3px solid var(--accent);padding:24px}.card.amber{border-top-color:var(--amber)}.card.teal{border-top-color:var(--teal)}.card.rose{border-top-color:var(--rose)}.card.ink{border-top-color:var(--deep)}
+.card h3{margin:0 0 8px;font-size:20px}.card h4{margin:0 0 12px}.card p{margin:0 0 8px;color:var(--ink2);font-size:14.5px}
+.definition{display:grid;grid-template-columns:150px 1fr;border:1px solid var(--line);background:#fff;border-radius:9px;overflow:hidden;margin:20px 0}
+.definition .term{padding:18px;background:var(--deep);color:#fff;font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:flex;align-items:center}
+.definition .meaning{padding:18px 20px;color:var(--ink2)}
+@media(max-width:600px){.definition{grid-template-columns:1fr}.definition .term{display:block}}
+.callout{border:1px solid #d9d3ff;background:#f1efff;border-left:4px solid var(--accent);border-radius:8px;padding:20px 22px;margin:24px 0}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#4f4b73}
+.callout.warning{border-color:#f1d8a9;background:#fff7e8;border-left-color:var(--amber)}.callout.warning p{color:#72551f}
+.callout.teal{border-color:#c9ecea;background:#e6f7f6;border-left-color:var(--teal)}.callout.teal p{color:#086d69}
+.callout.rose{border-color:#f5c9ce;background:#fdeef0;border-left-color:var(--rose)}.callout.rose p{color:#8c2c3a}
+.diagram{padding:24px;margin:24px 0}.diagram svg{width:100%;height:auto}
+.diagram-caption{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.flow-box{border:1px solid var(--line);border-radius:8px;padding:17px 12px;text-align:center;background:var(--paper)}
+.flow-box b{display:block;font-size:14px}.flow-box span{display:block;color:var(--ink3);font-size:11px;margin-top:3px}
+.flow-arrow{text-align:center;font-size:20px;color:var(--accent)}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+th{font:10.5px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:12px 15px;background:var(--deep);color:#c7d6e8}
+td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.takeaway{border:1px solid #294261;background:#ffffff08;border-radius:9px;padding:20px}
+.takeaway .n{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent2);margin-bottom:7px}
+.takeaway p{margin:0;color:#c7d6e8;font-size:14px}
+@media(max-width:760px){.takeaways{grid-template-columns:1fr}}
+.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.glossary div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px}
+.glossary b{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;display:block;margin-bottom:4px}
+.glossary span{display:block;color:var(--ink2);font-size:13.5px;margin-top:3px}
+@media(max-width:700px){.glossary{grid-template-columns:1fr}}
+.internal-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.internal-nav a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink);transition:all .2s}
+.internal-nav a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.internal-nav .dir{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+footer{background:var(--deep);color:#8fa6c0;border-top:1px solid #203552;padding:34px 0}
+.footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .mono{font-size:11px}footer strong{color:#dce8f5}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related a{border:1px solid var(--line);background:#fff;border-radius:9px;padding:18px 20px;display:block;color:var(--ink)}
+.related a:hover{border-color:var(--accent)}
+.related .tag{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+.related .t{font-size:15px;font-weight:600;margin:6px 0 4px}
+.related .d{font-size:13px;color:var(--ink2)}
+@media(max-width:820px){.related{grid-template-columns:1fr}}
+.kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;padding:2px 6px;background:#eef1f5;border:1px solid var(--line);border-radius:4px}
+ul.clean{padding-left:18px;margin:0}ul.clean li{margin-bottom:6px}
+@media print{nav{display:none}.hero{padding:45px 0}section{padding:38px 0}.card,.toc,table,.diagram{break-inside:avoid}}
+</style></head><body>
+<nav><div class="nav-in"><a class="brand" href="index.html">KNOWLEDGE <b>BASE</b> / AI</a><div class="nav-links"><a href="index.html">Home</a><a href="#overview">Overview</a><a href="#history">History</a><a href="#timeline">Timeline</a><a href="#glossary">Glossary</a><a href="02-goals.html">Next →</a></div></div></nav>
+
+<header class="hero" id="top"><div class="hero-grid"></div><div class="hero-glow"></div><div class="wrap hero-in">
+<div class="pill"><i></i> Note 01 of 09</div>
+<div class="eyebrow">Foundation</div>
+<h1 class="display">Foundations of <span>Artificial Intelligence</span></h1>
+<p class="hero-sub">What AI is, how the field evolved through cycles of optimism and disappointment, and why the current era represents a fundamental shift in computational intelligence.</p>
+<div class="meta-row"><span class="meta hot">FOUNDATION</span><span class="meta">READING · 15–20 MIN</span><span class="meta">PREREQUISITE · NONE</span><span class="meta">KNOWLEDGE BASE · 01 / 09</span></div>
+</div></header>
+
+<main>
+<section id="overview"><div class="wrap"><div class="sec-head"><div class="eyebrow">Start here</div><h2 class="sec-title display">A field defined by capability, not by any single technology.</h2><p>Artificial intelligence is the capability of computational systems to perform tasks typically associated with human intelligence: learning, reasoning, problem-solving, perception, and decision-making. It is a field of research in engineering, mathematics, and computer science that develops methods and software enabling machines to perceive their environment and take actions that maximize their chances of achieving defined goals.</p></div>
+
+<div class="grid2">
+<div class="toc"><div class="toc-title">On this page</div><ol>
+<li><a href="#definition">Working definition</a></li>
+<li><a href="#scope">Scope and interdisciplinary nature</a></li>
+<li><a href="#history">History: from Dartmouth to today</a></li>
+<li><a href="#timeline">Complete timeline</a></li>
+<li><a href="#winters">AI winters and booms</a></li>
+<li><a href="#modern">The modern era (2012–present)</a></li>
+<li><a href="#takeaways">Key takeaways</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ol></div>
+<div class="card amber"><h4>Learning objectives</h4><p>By the end of this note, you should be able to:</p>
+<ul class="clean"><li>Define AI and distinguish it from related fields</li>
+<li>Trace the major historical phases of AI research</li>
+<li>Explain why AI winters occurred and what ended them</li>
+<li>Identify the technological breakthroughs that enabled modern AI</li>
+<li>Articulate why the current AI boom differs from previous cycles</li></ul>
+</div>
+</div>
+</div></section>
+
+<section class="alt" id="definition"><div class="wrap"><div class="sec-head"><div class="eyebrow">01 — Definition</div><h2 class="sec-title display">AI is a capability, not a product.</h2></div>
+
+<div class="definition"><div class="term">Artificial Intelligence</div><div class="meaning">The capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making.</div></div>
+
+<p>High-profile applications of AI include advanced web search engines, chatbots, virtual assistants, autonomous vehicles, play and analysis in strategy games (e.g., chess and Go), and content generation (images, audio, and videos). The traditional goals of AI research include learning, reasoning, knowledge representation, planning, natural language processing, and perception, as well as support for robotics.</p>
+
+<div class="callout"><strong>The interdisciplinary nature</strong><p>AI draws upon psychology, linguistics, philosophy, neuroscience, and other fields. It is not purely a computer science discipline — it sits at the intersection of multiple fields, each contributing insights about intelligence, cognition, and computation.</p></div>
+
+<div class="grid3">
+<div class="card"><h4>Engineering</h4><p>Designing and building systems that exhibit intelligent behavior in practice.</p></div>
+<div class="card teal"><h4>Mathematics</h4><p>Providing formal frameworks for reasoning, optimization, probability, and learning theory.</p></div>
+<div class="card rose"><h4>Computer Science</h4><p>Developing algorithms, data structures, and computational models for intelligent systems.</p></div>
+</div>
+</div></section>
+
+<section id="scope"><div class="wrap"><div class="sec-head"><div class="eyebrow">02 — Scope</div><h2 class="sec-title display">What AI researchers work on.</h2><p>AI research addresses a wide range of capabilities, from narrow tasks (playing chess, recognizing faces) to the ambitious goal of artificial general intelligence (AGI) — systems that can complete nearly any cognitive task at least as well as a human.</p></div>
+
+<table><thead><tr><th>Traditional Goal</th><th>Description</th><th>Example</th></tr></thead><tbody>
+<tr><td>Reasoning</td><td>Step-by-step problem solving and logical deduction</td><td>Theorem proving, puzzle solving</td></tr>
+<tr><td>Knowledge representation</td><td>Encoding facts and relationships for intelligent use</td><td>Ontologies, knowledge graphs</td></tr>
+<tr><td>Planning</td><td>Deciding sequences of actions to achieve goals</td><td>Robot navigation, logistics</td></tr>
+<tr><td>Learning</td><td>Improving performance from experience</td><td>Image classification, language models</td></tr>
+<tr><td>Natural language processing</td><td>Reading, writing, and communicating in human languages</td><td>Translation, chatbots</td></tr>
+<tr><td>Perception</td><td>Interpreting sensory input (vision, speech, touch)</td><td>Object recognition, speech-to-text</td></tr>
+<tr><td>Social intelligence</td><td>Recognizing and simulating emotions and social cues</td><td>Affective computing, social robots</td></tr>
+<tr><td>General intelligence</td><td>Broad cognitive capability across many domains</td><td>AGI (not yet achieved)</td></tr>
+</tbody></table>
+
+<div class="callout teal" style="margin-top:24px"><strong>Narrow vs. general AI</strong><p>Most current AI systems are <strong>narrow</strong> — highly capable within specific domains but unable to generalize broadly. <strong>Artificial general intelligence</strong> (AGI) remains a long-term goal pursued by some companies (OpenAI, Google DeepMind, Meta), but has not been achieved. → <a href="09-philosophy-future.html">Note 09: Philosophy &amp; Future</a></p></div>
+</div></section>
+
+<section class="alt" id="history"><div class="wrap"><div class="sec-head"><div class="eyebrow">03 — History</div><h2 class="sec-title display">Sixty years of cycles.</h2><p>Artificial intelligence was founded as an academic discipline in 1956. The field went through multiple cycles of optimism throughout its history, followed by periods of disappointment and loss of funding known as <strong>AI winters</strong>.</p></div>
+
+<div class="grid2">
+<div class="card"><h3>The founding (1956)</h3><p>The Dartmouth workshop brought together researchers who believed that "every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it." This optimism fueled early breakthroughs and attracted significant funding.</p></div>
+<div class="card teal"><h3>Early successes (1950s–60s)</h3><p>Researchers developed programs that could solve algebra word problems, prove theorems, and learn to speak English. By the mid-1960s, the U.S. Department of Defense was heavily funding AI research, and optimism ran high.</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card rose"><h3>First AI winter (1974–80)</h3><p>Expectations exceeded reality. Computers lacked sufficient memory and processing power for complex tasks. Governments cut funding after disappointing results. The field entered its first period of reduced interest and investment.</p></div>
+<div class="card amber"><h3>Expert systems boom (1980s)</h3><p>Expert systems — rule-based programs that mimicked human experts — created a commercial market. Funding returned, and the AI industry grew rapidly. Japan's Fifth Generation Computer project spurred competition.</p></div>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+<div class="card ink"><h3>Second AI winter (1987–93)</h3><p>Expert systems proved expensive to maintain and brittle in practice. The market collapsed, and funding dried up again. The term "AI winter" was coined during this period.</p></div>
+<div class="card"><h3>Quiet progress (1990s–2000s)</h3><p>Researchers focused on narrower, more achievable goals. Statistical methods, machine learning, and neural networks made steady progress. Deep Blue defeated chess champion Garry Kasparov in 1997.</p></div>
+</div>
+
+<div class="callout warning" style="margin-top:24px"><strong>The pattern</strong><p>AI history shows a recurring pattern: bold promises → initial progress → overpromising → disappointment → funding cuts → recovery. Understanding this pattern is crucial for evaluating current claims about AI capabilities and timelines.</p></div>
+</div></section>
+
+<section id="timeline"><div class="wrap"><div class="sec-head"><div class="eyebrow">04 — Timeline</div><h2 class="sec-title display">Key milestones in AI history.</h2></div>
+
+<div class="diagram">
+<svg viewBox="0 0 900 600" role="img" aria-label="Timeline of major AI milestones from 1956 to 2024">
+<!-- Timeline line -->
+<line x1="50" y1="50" x2="50" y2="550" stroke="#6c5ce7" stroke-width="3"/>
+<!-- Milestones -->
+<circle cx="50" cy="60" r="8" fill="#6c5ce7"/>
+<text x="70" y="65" font-size="13" font-weight="700" fill="#172131">1956</text>
+<text x="120" y="65" font-size="12" fill="#566579">Dartmouth Workshop — AI founded as academic discipline</text>
+
+<circle cx="50" cy="110" r="8" fill="#10a5a0"/>
+<text x="70" y="115" font-size="13" font-weight="700" fill="#172131">1966</text>
+<text x="120" y="115" font-size="12" fill="#566579">ELIZA — first chatbot, demonstrates natural language interaction</text>
+
+<circle cx="50" cy="160" r="8" fill="#e05a6b"/>
+<text x="70" y="165" font-size="13" font-weight="700" fill="#172131">1974–80</text>
+<text x="120" y="165" font-size="12" fill="#566579">First AI winter — funding cuts, reduced expectations</text>
+
+<circle cx="50" cy="210" r="8" fill="#f0a32b"/>
+<text x="70" y="215" font-size="13" font-weight="700" fill="#172131">1980s</text>
+<text x="120" y="215" font-size="12" fill="#566579">Expert systems boom — commercial AI market emerges</text>
+
+<circle cx="50" cy="260" r="8" fill="#e05a6b"/>
+<text x="70" y="265" font-size="13" font-weight="700" fill="#172131">1987–93</text>
+<text x="120" y="265" font-size="12" fill="#566579">Second AI winter — expert systems collapse</text>
+
+<circle cx="50" cy="310" r="8" fill="#10a5a0"/>
+<text x="70" y="315" font-size="13" font-weight="700" fill="#172131">1997</text>
+<text x="120" y="315" font-size="12" fill="#566579">Deep Blue defeats Garry Kasparov in chess</text>
+
+<circle cx="50" cy="360" r="8" fill="#6c5ce7"/>
+<text x="70" y="365" font-size="13" font-weight="700" fill="#172131">2012</text>
+<text x="120" y="365" font-size="12" fill="#566579">AlexNet wins ImageNet — deep learning breakthrough with GPUs</text>
+
+<circle cx="50" cy="410" r="8" fill="#10a5a0"/>
+<text x="70" y="415" font-size="13" font-weight="700" fill="#172131">2016</text>
+<text x="120" y="415" font-size="12" fill="#566579">AlphaGo defeats world champion Lee Sedol in Go</text>
+
+<circle cx="50" cy="460" r="8" fill="#f0a32b"/>
+<text x="70" y="465" font-size="13" font-weight="700" fill="#172131">2017</text>
+<text x="120" y="465" font-size="12" fill="#566579">Transformer architecture introduced — "Attention Is All You Need"</text>
+
+<circle cx="50" cy="510" r="8" fill="#6c5ce7"/>
+<text x="70" y="515" font-size="13" font-weight="700" fill="#172131">2022</text>
+<text x="120" y="515" font-size="12" fill="#566579">ChatGPT launch — generative AI becomes mainstream</text>
+
+<circle cx="50" cy="540" r="8" fill="#10a5a0"/>
+<text x="70" y="545" font-size="13" font-weight="700" fill="#172131">2023+</text>
+<text x="120" y="545" font-size="12" fill="#566579">AI boom accelerates — multimodal models, AI agents emerge</text>
+</svg>
+<div class="diagram-caption">Figure 01 · Major milestones in artificial intelligence (1956–2024)</div>
+</div>
+</div></section>
+
+<section class="alt" id="winters"><div class="wrap"><div class="sec-head"><div class="eyebrow">05 — AI Winters</div><h2 class="sec-title display">When progress stalled and funding vanished.</h2><p>AI winters are periods of reduced interest, funding, and progress in artificial intelligence research. They occur when expectations exceed technological capabilities and promised breakthroughs fail to materialize.</p></div>
+
+<div class="grid2">
+<div class="card rose"><h3>First winter (1974–1980)</h3><p><strong>Causes:</strong> Insufficient computing power, combinatorial explosion problems, failure of machine translation, Lighthill report criticizing AI progress.</p>
+<p><strong>Effects:</strong> DARPA cut funding, research slowed, skepticism grew. AI became associated with overpromising.</p></div>
+<div class="card rose"><h3>Second winter (1987–1993)</h3><p><strong>Causes:</strong> Expert systems proved expensive and brittle, desktop computers overtook specialized Lisp machines, Fifth Generation Computer project disappointed.</p>
+<p><strong>Effects:</strong> AI market collapsed from $1 billion to $100 million, researchers avoided the term "AI" to escape stigma.</p></div>
+</div>
+
+<div class="callout" style="margin-top:24px"><strong>Lessons from the winters</strong><p>AI winters teach that technological progress is non-linear. Breakthroughs require not just clever algorithms but sufficient hardware, data, and infrastructure. Overpromising damages the entire field and delays progress.</p></div>
+</div></section>
+
+<section id="modern"><div class="wrap"><div class="sec-head"><div class="eyebrow">06 — Modern Era</div><h2 class="sec-title display">The breakthroughs that changed everything.</h2><p>Funding and interest increased substantially after 2012, when graphics processing units (GPUs) started being used to accelerate neural networks, and deep learning outperformed previous AI techniques. This growth accelerated further after 2017 with the transformer architecture. In the 2020s, an AI boom coincided with advances in generative AI, which became widespread and allowed for the creation and modification of media.</p></div>
+
+<div class="definition"><div class="term">GPU Revolution</div><div class="meaning">Graphics processing units, originally designed for rendering video games, proved highly effective for training neural networks due to their parallel processing capabilities. This made deep learning practical for the first time.</div></div>
+
+<div class="definition"><div class="term">Deep Learning</div><div class="meaning">Machine learning using multi-layer neural networks that can learn increasingly abstract representations of data. Deep learning outperformed previous techniques on tasks like image recognition, speech processing, and natural language understanding.</div></div>
+
+<div class="definition"><div class="term">Transformer Architecture</div><div class="meaning">A neural network architecture introduced in 2017 that uses attention mechanisms to process sequential data more efficiently than previous approaches. Transformers enabled large language models like GPT, BERT, and their successors.</div></div>
+
+<div class="grid3">
+<div class="card"><h4>2012: AlexNet</h4><p>A deep convolutional neural network won the ImageNet competition by a large margin, demonstrating that deep learning could achieve superhuman performance on visual recognition tasks.</p></div>
+<div class="card teal"><h4>2017: Attention</h4><p>The paper "Attention Is All You Need" introduced transformers, replacing recurrent networks with a more efficient attention mechanism that could be parallelized across GPUs.</p></div>
+<div class="card amber"><h4>2022: ChatGPT</h4><p>OpenAI's ChatGPT demonstrated that large language models could engage in fluent conversation, write code, and assist with diverse tasks. Generative AI became mainstream.</p></div>
+</div>
+
+<div class="callout teal" style="margin-top:24px"><strong>Why this boom is different</strong><p>Previous AI cycles focused on narrow capabilities (chess, expert systems). The current boom is built on <strong>foundation models</strong> — large neural networks trained on massive datasets that can be adapted to many tasks. These models exhibit emergent capabilities and generalization that previous systems lacked. → <a href="05-modern-systems.html">Note 05: Modern AI Systems</a></p></div>
+</div></section>
+
+<section class="dark" id="takeaways"><div class="wrap"><div class="sec-head center"><div class="eyebrow">End of note</div><h2 class="sec-title display">Remember these ideas.</h2></div>
+<div class="takeaways">
+<div class="takeaway"><div class="n">01</div><p>AI is the capability of computational systems to perform tasks associated with human intelligence — not a single technology but a broad field.</p></div>
+<div class="takeaway"><div class="n">02</div><p>AI research has pursued eight traditional goals: reasoning, knowledge representation, planning, learning, NLP, perception, social intelligence, and general intelligence.</p></div>
+<div class="takeaway"><div class="n">03</div><p>The field has experienced cycles of optimism and disappointment, with two major AI winters (1974–80, 1987–93) caused by overpromising and underdelivering.</p></div>
+<div class="takeaway"><div class="n">04</div><p>Three breakthroughs enabled modern AI: GPUs for parallel computation (2012), deep learning architectures, and transformers (2017).</p></div>
+<div class="takeaway"><div class="n">05</div><p>The current AI boom differs from previous cycles because foundation models exhibit broad generalization and emergent capabilities, not just narrow task performance.</p></div>
+</div>
+</div></section>
+
+<section id="glossary"><div class="wrap"><div class="sec-head"><div class="eyebrow">Reference</div><h2 class="sec-title display">Glossary</h2></div>
+<div class="glossary">
+<div><b>Artificial Intelligence</b><span>The capability of computational systems to perform tasks associated with human intelligence.</span></div>
+<div><b>AI Winter</b><span>A period of reduced funding, interest, and progress in AI research, typically following overpromising.</span></div>
+<div><b>Deep Learning</b><span>Machine learning using multi-layer neural networks to learn hierarchical representations.</span></div>
+<div><b>GPU</b><span>Graphics processing unit — hardware originally for graphics, now widely used for neural network training.</span></div>
+<div><b>Transformer</b><span>A neural network architecture using attention mechanisms to process sequential data efficiently.</span></div>
+<div><b>Foundation Model</b><span>A large neural network trained on diverse data that can be adapted to many downstream tasks.</span></div>
+<div><b>AGI</b><span>Artificial general intelligence — hypothetical AI with broad cognitive capability across many domains.</span></div>
+<div><b>Narrow AI</b><span>AI systems capable of performing specific tasks well but unable to generalize broadly.</span></div>
+</div>
+</div></section>
+
+<section class="alt"><div class="wrap"><div class="sec-head"><div class="eyebrow">Navigation</div><h2 class="sec-title display">Continue learning.</h2></div>
+<div class="internal-nav">
+<a href="index.html"><div class="dir">← Back</div><strong>Index</strong><p class="muted">Return to the knowledge base home page</p></a>
+<a href="02-goals.html"><div class="dir">Next →</div><strong>02 · The Goals of AI Research</strong><p class="muted">Explore the eight traditional goals that define what AI research tries to achieve</p></a>
+</div>
+<div class="related" style="margin-top:28px">
+<a href="03-traditional-techniques.html"><div class="tag">Techniques</div><div class="t">Traditional AI Techniques</div><div class="d">Search, logic, probability, and classification methods</div></a>
+<a href="04-machine-learning.html"><div class="tag">Learning</div><div class="t">Machine Learning &amp; Neural Networks</div><div class="d">How systems learn from data</div></a>
+<a href="09-philosophy-future.html"><div class="tag">Philosophy</div><div class="t">Philosophy &amp; Future of AI</div><div class="d">Deep questions about consciousness and intelligence</div></a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap footer-in"><div class="mono"><strong>01 · FOUNDATIONS OF AI</strong><br>Knowledge Base · Note 01 of 09</div><div class="mono">Source: Wikipedia · September 2026</div></div></footer>
+</body></html>
